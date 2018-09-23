@@ -1,0 +1,146 @@
+<style lang="less">
+.hg__bigspans {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.hg__goodtitle {
+  height: auto!important;
+  max-height: auto!important;
+}
+.hg__bigspan {
+  flex: 1;
+  position: relative;
+  padding: 28rpx;
+  width: 100%;
+  font-size: 0;
+  background: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  & + & {
+    border-top: 1rpx solid #ebebeb;
+  }
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+  &__info {
+    margin-top: 20rpx;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0;
+    width: 100%;
+  }
+}
+.hg__goodbtn {
+  position: absolute;
+  right: 28rpx;
+  bottom: 28rpx;
+  width: auto;
+}
+</style>
+<template>
+<view class="hg__bigspans {{parentClassName}}">
+  <repeat for="{{goods}}" key="{{index}}">
+    <view class="hg__bigspan {{className}}">
+      <navigator class="hg__bigspan__inner" url="" hover-class="none">
+        <pic :url.sync="item['long_pic']" :width="width" :height="height" :overText.sync="item['over']" />
+        <view class="hg__bigspan__info">
+          <title className="hg__goodtitle" :text.sync="item['title']" :icon.sync="item['country']" />
+          <!-- tags start -->
+          <tags :lists.sync="item['tags']" />
+          <!-- tags end -->
+          <view class="hg__bigspan__footer">
+            <prices :saleText.sync="item['sale_price']" :profit.sync="item['profit']" />
+          </view>
+        </view>
+      </navigator>
+      <block wx:if="{{item['needBtn']}}">
+        <block wx:if="{{!!item['btnIcon']}}">
+          <iconBtn :className.sync="item['btnClassName']" :icon.sync="item['btnIcon']" :text.sync="item['btnText']" @callback.user="handleClick" />
+        </block>
+        <block wx:else>
+          <btn :className.sync="item['btnClassName']" :text.sync="item['btnText']" :size.sync="item['btnSize']" :params.sync="item" @callback.user="handleClick" />
+        </block>
+      </block>
+    </view>
+  </repeat>
+</view>
+</template>
+<script>
+import wepy from 'wepy';
+import pic from './Pic';
+import title from './Title';
+import tags from './Tags';
+import prices from './Prices';
+import iconBtn from 'components/Icon';
+import btn from 'components/Btn';
+export default class BigSpan extends wepy.component {
+  props = {
+    parentClassName: {
+      type: String,
+      default: ''
+    },
+    className: {
+      type: String,
+      default: ''
+    },
+    goods: {
+      type: Array,
+      default: []
+    },
+    width: {
+      type: Number,
+      default: 694
+    },
+    height: {
+      type: Number,
+      default: 324
+    },
+    callback: {
+      type: Function
+    }
+  };
+  components = {
+    pic,
+    title,
+    tags,
+    prices,
+    iconBtn,
+    btn
+  };
+  computed = {
+    good() {
+      console.log(this.good);
+      return this.good;
+    }
+  };
+  methods = {
+    handleClick() {
+      this.$emit('callback', this.good);
+    }
+  };
+}
+</script>

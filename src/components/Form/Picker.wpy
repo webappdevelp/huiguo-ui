@@ -1,0 +1,162 @@
+<style lang="less">
+.hg__picker {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 0;
+  &__label {
+    font-size: 30rpx;
+    color: #333;
+  }
+  &__label + picker {
+    margin-left: 28rpx;
+  }
+  picker {
+    flex: 1;
+    font-size: 0;
+  }
+  &__inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0;
+  }
+  &__value {
+    flex: 1;
+    font-size: 30rpx;
+    color: #333;
+    &.empty {
+      color: #999;
+    }
+  }
+  .arrow-right {
+    .hg__icon__pic {
+      width: 14rpx;
+      height: 24rpx;
+    }
+  }
+}
+</style>
+<template>
+  <view class="hg__picker {{className}}">
+    <view wx:if="{{!!label.length}}" class="hg__picker__label {{labelClassName}}">{{label}}</view>
+    <block wx:if="{{mode === 'time' || mode === 'date'}}">
+      <picker mode="{{mode}}" value="{{value}}" start="{{start}}" end="{{end}}" fields="{{fields}}" disabled="{{disabled}}" @change="change">
+        <view class="hg__picker__inner">
+          <view class="hg__picker__value {{!value ? 'empty' : ''}}">{{value ? value : placeholder}}</view>
+          <icon :icon.sync="icon" :className.sync="iconClassName" />
+        </view>
+      </picker>
+    </block>
+    <block wx:elif="{{mode === 'multiSelector'}}">
+      <picker mode="{{mode}}" value="{{value}}" range="{{range}}" range-key="{{rangeKey}}" disabled="{{disabled}}" @change="change">
+        <view class="hg__picker__inner">
+          <view class="hg__picker__value {{!range[0][value[0]] ? 'empty' : ''}}">
+            <slot name="value" />
+          </view>
+          <icon :icon.sync="icon" :className.sync="iconClassName" />
+        </view>
+      </picker>
+    </block>
+    <block wx:elif="{{mode === 'region'}}">
+      <picker mode="{{mode}}" value="{{value}}" custom-item="{{customItem}}" disabled="{{disabled}}" @change="change">
+        <view class="hg__picker__inner">
+          <view class="hg__picker__value {{!value.length ? 'empty' : ''}}">{{value[0] ? value[0] : placeholder}} {{value[1]}} {{value[2]}}</view>
+          <icon :icon.sync="icon" :className.sync="iconClassName" />
+        </view>
+      </picker>
+    </block>
+    <block wx:else>
+      <picker mode="{{mode}}" value="{{value}}" range="{{range}}" range-key="{{rangeKey}}" disabled="{{disabled}}" @change="change">
+        <view class="hg__picker__inner">
+          <view class="hg__picker__value {{rangeKey ? !range[value][rangeKey] : !range[value] ? 'empty' : ''}}">{{rangeKey ? range[value][rangeKey] : range[value] ? range[value] : placeholder}}</view>
+          <icon :icon.sync="icon" :className.sync="iconClassName" />
+        </view>
+      </picker>
+    </block>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import icon from 'components/Icon';
+export default class Picker extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    label: {
+      type: String,
+      default: ''
+    },
+    labelClassName: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: '/images/common/arrow-right.png'
+    },
+    iconClassName: {
+      type: String,
+      default: 'arrow-right'
+    },
+    mode: {
+      type: String,
+      default: ''
+    },
+    start: {
+      type: String,
+      default: ''
+    },
+    end: {
+      type: String,
+      default: ''
+    },
+    fields: {
+      type: String,
+      default: 'day'
+    },
+    range: {
+      type: Array,
+      default: []
+    },
+    value: {
+      type: Number,
+      twoWay: true,
+      default: 0
+    },
+    customItem: {
+      type: String,
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      default: '请选择'
+    },
+    rangeKey: {
+      type: String,
+      default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  };
+  components = {
+    icon
+  };
+  methods = {
+    change(event) {
+      let { value } = event.detail;
+      this.value = value;
+      this.$apply();
+      console.log(value);
+    }
+  };
+}
+</script>

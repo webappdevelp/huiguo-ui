@@ -1,0 +1,135 @@
+<style lang="less">
+.inputs {
+  width: 100%;
+}
+.label {
+  min-width: 180rpx;
+}
+.err__tips {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #c43636;
+  &-icon {
+    margin-right: 8rpx;
+    .hg__icon__pic {
+      width: 24rpx;
+      height: 24rpx;
+    }
+  }
+}
+.get__code {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0;
+  border-bottom: 1rpx solid #ebebeb;
+  .hg__input {
+    flex: 1;
+    border-bottom: 0 none;
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Input 输入框" />
+    <view class="body">
+      <baseItem title="基本用法">
+        <block slot="inner">
+          <view class="inputs">
+            <baseInput label="文本" labelClassName="label" placeholder="请输入您要的内容" />
+            <numberInput label="数字" labelClassName="label"  type="number" placeholder="请输入数字内容" />
+            <digitInput label="小数点" labelClassName="label"  type="digit" placeholder="请输入内容" />
+            <idcardInput label="身份证" labelClassName="label"  type="idcard" placeholder="请输入您的身份证信息" />
+            <password label="密码" labelClassName="label"  type="text" :password="password" placeholder="请输入您的密码" />
+            <disabled label="禁用" labelClassName="label"  type="text" :disabled="disabled" placeholder="禁止输入操作" />
+            <maxlength label="最大长度值" labelClassName="label"  type="text" :maxLength="maxLength" placeholder="输入不超过6个字符" />
+            <clearInput label="显示清除按钮" labelClassName="label"  type="text" :showClear.sync="showClear" :value.sync="clearValue" placeholder="输入不超过6个字符" />
+          </view>
+        </block>
+      </baseItem>
+      <getCodeItem title="获取验证码">
+        <block slot="inner">
+          <view class="inputs">
+            <mobileInput placeholder="请输入手机号" type="number" :value.sync="mobile" :maxLength="mobileLength" />
+            <view class="err__tips" wx:if="{{!!errTips.length}}">
+              <errIcon className="err__tips-icon" icon="/images/common/err_tips.png" />
+              {{errTips}}
+            </view>
+            <view class="get__code">
+              <codeInput placeholder="请输入验证码" type="text" :maxLength="codeLength" />
+              <getSnsCode :params.sync="mobile" :disabled.sync="codeDisabled" />
+            </view>
+          </view>
+        </block>
+      </getCodeItem>
+    </view>
+    <toast :text.sync="toastText" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import inputItem from 'components/Form/Input';
+import getSnsCode from 'components/Form/GetSnsCode';
+import toast from 'components/Toast';
+import errIcon from 'components/Icon';
+export default class InputPage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    baseItem: item,
+    getCodeItem: item,
+    baseInput: inputItem,
+    numberInput: inputItem,
+    digitInput: inputItem,
+    idcardInput: inputItem,
+    password: inputItem,
+    disabled: inputItem,
+    maxlength: inputItem,
+    clearInput: inputItem,
+    mobileInput: inputItem,
+    codeInput: inputItem,
+    getSnsCode,
+    errIcon,
+    toast
+  };
+  data = {
+    toastText: '',
+    password: true,
+    disabled: true,
+    maxLength: 6,
+    showClear: false,
+    clearValue: '清除内容',
+    mobile: '',
+    mobileLength: 11,
+    codeLength: 6,
+    errTips: '',
+    codeDisabled: true
+  };
+  computed = {
+    showClear() {
+      return !!this.clearValue.length;
+    },
+    errTips() {
+      if (this.mobile.length && !/^1(3|4|5|7|8|9)\d{9}$/.test(this.mobile)) {
+        return '输入的手机号格式错误';
+      }
+      return '';
+    },
+    codeDisabled() {
+      if (/^1(3|4|5|7|8|9)\d{9}$/.test(this.mobile)) {
+        return false;
+      }
+      return true;
+    }
+  };
+}
+</script>

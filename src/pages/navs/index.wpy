@@ -1,0 +1,49 @@
+<style lang="less">
+</style>
+<template>
+  <view class="container">
+    <listHeader icon="/images/pages/nav.png" text="导航" />
+    <lists :lists="lists" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import listHeader from 'components/ListHeader';
+import lists from 'components/ListNavs';
+export default class BasePage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    listHeader,
+    lists
+  };
+
+  mixins = [];
+
+  data = {
+    lists: [
+      {
+        link: '/pages/navs/navbar',
+        text: 'NavBar 顶部导航'
+      },
+      {
+        link: '/pages/navs/toolbar',
+        text: 'ToolBar 底部导航'
+      },
+      {
+        link: '/pages/navs/tabs',
+        text: 'Tabs 切换'
+      }
+    ]
+  };
+
+  computed = {};
+
+  methods = {};
+
+  events = {};
+
+  onLoad() {}
+}
+</script>

@@ -1,0 +1,66 @@
+<style lang="less">
+.hg__badge {
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background: #D64040;
+  box-sizing: border-box;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  &-number {
+    top: -25%;
+    right: -25%;
+    padding: 0 8rpx;
+    width: auto;
+    height: auto;
+    min-width: 30rpx;
+    min-height: 30rpx;
+    font-size: 20rpx;
+    border-radius: 200rpx;
+  }
+  &-text {
+    top: -25%;
+    right: -35%;
+    width: auto;
+    height: auto;
+    padding: 0 8rpx;
+    min-height: 22rpx;
+    font-size: 16rpx;
+    border-radius: 40rpx 46rpx 46rpx 0;
+  }
+}
+</style>
+<template>
+  <view class="hg__badge hg__badge-{{type}} {{className}}">
+    <text>{{text}}</text>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class Badge extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    type: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      default: ''
+    }
+  };
+}
+</script>

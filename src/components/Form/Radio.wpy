@@ -1,0 +1,115 @@
+<style lang="less">
+.hg__radios {
+  flex: 1;
+  max-width: 100%;
+  overflow: hidden;
+}
+.hg__radio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  padding-right: 60rpx;
+  font-size: 0;
+  min-height: 48rpx;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  &.disabled {
+    .hg__radio__title {
+      color: #999;
+    }
+  }
+  .hg__icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate3d(0, -50%, 0);
+  }
+  &__hiden {
+    display: none;
+  }
+  &__title,
+  &__desc {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+  }
+  &__title {
+    line-height: 42rpx;
+    font-size: 30rpx;
+    color: #333;
+  }
+  &__desc {
+    font-size: 20rpx;
+    color: #999;
+  }
+}
+</style>
+<template>
+  <radio-group class="hg__radios {{className}}" @change="change">
+    <label wx:for="{{params}}" wx:key="index" class="hg__radio {{item['disabled'] ? 'disabled' : ''}} {{radioClassName}}" >
+      <view class="hg__radio__title">{{item['value']}}</view>
+      <view class="hg__radio__desc">{{item['desc']}}</view>
+      <block wx:if="{{defaultValue === item['value'] && item['disabled']}}">
+        <checkedDisabledIcon :icon.sync="disabledIcon" :className.sync="iconClassName" />
+      </block>
+      <block wx:elif="{{defaultValue === item['value'] && !item['disabled']}}">
+        <checkedIcon :icon.sync="icon" :className.sync="iconClassName" />
+      </block>
+      <view class="hg__radio__hiden">
+        <radio value="{{item['value']}}" checked="{{item['checked']}}" disabled="{{item['disabled']}}" />
+      </view>
+    </label>
+  </radio-group>
+</template>
+<script>
+import wepy from 'wepy';
+import icon from 'components/Icon';
+export default class Radio extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    radioClassName: {
+      type: String,
+      default: ''
+    },
+    params: {
+      type: Array,
+      default: []
+    },
+    defaultValue: {
+      type: String,
+      twoWay: true,
+      default: ''
+    },
+    iconClassName: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: '/images/common/radio.png'
+    },
+    disabledIcon: {
+      type: String,
+      default: '/images/common/radio_disabled.png'
+    }
+  };
+  components = {
+    checkedIcon: icon,
+    checkedDisabledIcon: icon
+  };
+  methods = {
+    change(event) {
+      let { value } = event.detail;
+      this.defaultValue = value;
+      this.$apply();
+    }
+  };
+}
+</script>

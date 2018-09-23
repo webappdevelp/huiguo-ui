@@ -1,0 +1,85 @@
+<style lang="less">
+.hg__goodpic {
+  position: relative;
+  width: 373rpx;
+  overflow: hidden;
+}
+.hg__goodpic-main {
+  width: 374rpx;
+  height: 374rpx;
+}
+.hg__goodpic-sub {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100rpx;
+  height: auto;
+}
+.hg__goodover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  height: 156rpx;
+  width: 156rpx;
+  font-size: 32rpx;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1rpx solid currentColor;
+  box-sizing: border-box;
+  border-radius: 50%;
+  color: #fff;
+  transform: translate3d(-50%, -50%, 0);
+  overflow: hidden;
+  &.big {
+    width: 196rpx;
+    height: 196rpx;
+    font-size: 36rpx;
+  }
+}
+</style>
+<template>
+  <view class="hg__goodpic {{className}}" style="width: {{width}}rpx; height: {{height}}rpx">
+    <image wx:if="{{!!sub}}" class="hg__goodpic-sub" lazy-load src="{{sub}}" />
+    <view wx:if="{{!!overText}}" class="hg__goodover {{overSize}}">{{overText}}</view>
+    <image class="hg__goodpic-main" lazy-load src="{{url}}" style="width: {{width}}rpx; height: {{height}}rpx"/>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class GoodPic extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    url: {
+      type: String,
+      default: ''
+    },
+    width: {
+      type: Number,
+      default: 374
+    },
+    height: {
+      type: Number,
+      default: 374
+    },
+    sub: {
+      type: String,
+      default: ''
+    },
+    overText: {
+      type: String,
+      default: ''
+    },
+    overSize: {
+      type: String,
+      default: ''
+    }
+  };
+}
+</script>

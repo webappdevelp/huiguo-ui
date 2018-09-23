@@ -1,0 +1,67 @@
+<style lang="less">
+.body {
+  padding: 24rpx 28rpx 100rpx;
+}
+.page__item + .page__item {
+  padding-top: 96rpx;
+}
+.page__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 12rpx;
+  font-size: 0;
+  &__title {
+    position: relative;
+    padding-left: 20rpx;
+    line-height: 44rpx;
+    font-size: 32rpx;
+    color: #333;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 4rpx;
+      height: 30rpx;
+      background: #f3cc7a;
+      transform: translate3d(0, -50%, 0);
+    }
+  }
+  &__inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    font-size: 0;
+    padding: 52rpx 38rpx 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+</style>
+<template>
+  <view class="page__item">
+    <view class="page__item__title">{{title}}</view>
+    <view class="page__item__inner">
+      <slot name="inner">内容</slot>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class PageItemTitle extends wepy.component {
+  props = {
+    title: {
+      type: String,
+      default: ''
+    },
+    className: {
+      type: String,
+      default: ''
+    }
+  };
+}
+</script>

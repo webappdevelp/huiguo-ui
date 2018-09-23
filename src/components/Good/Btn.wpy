@@ -1,0 +1,56 @@
+<style lang="less">
+.hg__goodbtn {
+  position: absolute;
+  right: 24rpx;
+  bottom: 24rpx;
+}
+</style>
+<template>
+<block>
+  <block wx:if="{{!!icon}}">
+    <icon :className.sync="className" :icon.sync="icon" :text.sync="text" @callback.user="handleClick" />
+  </block>
+  <block wx:else>
+    <view class="{{className}}">
+      <btn :className.sync="className" :text.sync="text" :size.sync="size" @callback.user="handleClick" />
+    </view>
+  </block>
+</block>
+</template>
+<script>
+import wepy from 'wepy';
+import icon from 'components/Icon';
+import btn from 'components/Btn';
+export default class GoodBtn extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: 'hg__goodbtn'
+    },
+    icon: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      default: ''
+    },
+    size: {
+      type: String,
+      default: ''
+    },
+    callback: {
+      type: Function
+    }
+  };
+  components = {
+    icon,
+    btn
+  };
+  methods = {
+    handleClick() {
+      this.$emit('callback');
+    }
+  }
+}
+</script>

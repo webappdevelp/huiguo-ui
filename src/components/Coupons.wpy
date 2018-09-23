@@ -1,0 +1,279 @@
+<style lang="less">
+.hg__coupon {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 0;
+  width: 100%;
+  overflow: hidden;
+  & + & {
+    margin-top: 20rpx;
+  }
+  &__box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 0;
+    height: 196rpx;
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+  }
+  &__left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 180rpx;
+    height: 196rpx;
+    background: #E0BE75;
+    overflow: hidden;
+  }
+  &__right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    font-size: 0;
+    padding: 0 24rpx;
+    width: 100%;
+    height: 196rpx;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  &__value,
+  &__condition {
+    color: #fff;
+  }
+  &__value {
+    font-size: 56rpx;
+    text {
+      font-size: 32rpx;
+    }
+  }
+  &__condition {
+    font-size: 24rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    text-overflow: ellipsis;
+  }
+  &__name,
+  &__validity,
+  &__limit {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+  }
+  &__name {
+    line-height: 40rpx;
+    font-size: 28rpx;
+    color: #333;
+  }
+  &__validity {
+    margin: 8rpx 0;
+    font-size: 20rpx;
+    color: #666;
+  }
+  &__limit {
+    font-size: 24rpx;
+    color: #666;
+  }
+  &__status {
+    position: absolute;
+    right: 28rpx;
+    bottom: 16rpx;
+    .hg__icon__pic {
+      width: 112rpx;
+      height: 104rpx;
+    }
+  }
+  &__desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 0;
+    width: 100%;
+    padding: 16rpx 12rpx;
+    background: #fafafa;
+    box-sizing: border-box;
+  }
+  &__desc__moreicon image {
+    width: 24rpx;
+    height: 24rpx;
+  }
+  &__desc__header,
+  &__desc__body {
+    flex: 1;
+    width: 100%;
+    display: flex;
+  }
+  &__desc__header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text {
+      font-size: 24rpx;
+      color: #999;
+    }
+    .hg__icon {
+      transition: all .3s ease;
+    }
+    &.active {
+      .hg__icon {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+  &__desc__body {
+    margin-top: 8rpx;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 0;
+  }
+  &__desc__item {
+    width: 100%;
+    font-size: 24rpx;
+    color: #666;
+    line-height: 34rpx;
+    & + & {
+      margin-top: 8rpx;
+    }
+  }
+  .hg__btn {
+    position: absolute;
+    right: 24rpx;
+    bottom: 20rpx;
+    width: auto;
+  }
+}
+.hg__coupon.disabled {
+  .hg__coupon__left {
+    background: #dbdbdb;
+  }
+  .hg__coupon__name,
+  .hg__coupon__validity,
+  .hg__coupon__limit {
+    color: #bbb;
+  }
+}
+</style>
+<template>
+<block>
+    <repeat for="{{coupons}}" key="index">
+      <view class="hg__coupon {{item['status'] !== '0' ? 'disabled' : ''}}">
+        <view class="hg__coupon__box">
+          <view class="hg__coupon__left">
+            <view class="hg__coupon__value">
+              <text>¥</text>{{item['value']}}
+            </view>
+            <view class="hg__coupon__condition">{{item['condition']}}</view>
+          </view>
+          <view class="hg__coupon__right">
+            <view class="hg__coupon__name">{{item['name']}}</view>
+            <view class="hg__coupon__validity">{{item['validity']}}</view>
+            <view class="hg__coupon__limit">{{item['limit']}}</view>
+            <block wx:if="{{item['status'] === '0'}}">
+              <btn :className.sync="btnClassName" :text.sync="btnText" :params.sync="item"  @callback.user="handleClick" />
+            </block>
+            <block wx:elif="{{item['status'] === '1'}}">
+              <usedIcon className="hg__coupon__status" icon="/images/common/coupon_used.png" />
+            </block>
+            <block wx:else>
+              <overIcon className="hg__coupon__status" icon="/images/common/coupon_over.png" />
+            </block>
+          </view>
+        </view>
+        <view class="hg__coupon__desc">
+          <view class="hg__coupon__desc__header {{item['show'] ? 'active' : ''}}" data-id="{{item['id']}}" @tap="showMore">
+            <text>详细信息</text>
+            <moreIcon :className="iconClassName" :icon.sync="icon" />
+          </view>
+          <block wx:if="{{item['show'] && item['desc'].length}}">
+            <view class="hg__coupon__desc__body">
+              <block wx:for="{{item['desc']}}" wx:key="{{index}}">
+                <view class="hg__coupon__desc__item">
+                  {{item}}
+                </view>
+              </block>
+            </view>
+          </block>
+        </view>
+      </view>
+    </repeat>
+</block>
+</template>
+<script>
+import wepy from 'wepy';
+import icon from 'components/Icon';
+import btn from 'components/Btn';
+export default class Coupons extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    coupons: {
+      type: Array,
+      default: []
+    },
+    iconClassName: {
+      type: String,
+      default: 'hg__coupon__desc__moreicon'
+    },
+    icon: {
+      type: String,
+      default: '/images/common/more.png'
+    },
+    btnClassName: {
+      type: String,
+      default: ''
+    },
+    btnText: {
+      type: String,
+      default: ''
+    },
+    callback: {
+      type: Function
+    }
+  };
+  components = {
+    usedIcon: icon,
+    overIcon: icon,
+    moreIcon: icon,
+    btn
+  };
+  computed = {
+    btnClassName() {
+      return `small ghost ${this.btnClassName}`;
+    }
+  };
+  methods = {
+    handleClick(data) {
+      this.$emit('callback', data);
+    },
+    showMore(event) {
+      let { dataset } = event.currentTarget;
+      let { id } = dataset;
+      if (id) {
+        this.coupons = this.coupons.map(item => {
+          if (item['id'] === id) {
+            item['show'] = !item['show'];
+          }
+          return item;
+        });
+        this.$apply();
+      }
+    }
+  };
+}
+</script>

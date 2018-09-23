@@ -1,0 +1,61 @@
+<style lang="less">
+.switch__item {
+  border-bottom: 1rpx solid #ebebeb;
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Switch 开关切换" />
+    <view class="body">
+      <baseItem title="基本用法">
+        <block slot="inner">
+          <baseSwitch className="switch__item" text="开关" @callback.user="switchCallback" />
+        </block>
+      </baseItem>
+      <checkedItem title="默认开启">
+        <block slot="inner">
+          <switchEd className="switch__item" :checked.sync="checked" text="开关" @callback.user="switchCallback" />
+        </block>
+      </checkedItem>
+      <disabedItem title="禁用">
+        <block slot="inner">
+          <switchDisabled className="switch__item" :checked.sync="checked" :disabled.sync="disabled" text="开关" @callback.user="switchCallback" />
+        </block>
+      </disabedItem>
+    </view>
+    <toast :text.sync="toastText" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import switchItem from 'components/Form/Switch';
+import toast from 'components/Toast';
+export default class SwitchPage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    baseItem: item,
+    checkedItem: item,
+    disabedItem: item,
+    baseSwitch: switchItem,
+    switchEd: switchItem,
+    switchDisabled: switchItem,
+    toast
+  };
+  data = {
+    toastText: '',
+    checked: true,
+    disabled: true
+  };
+  methods = {
+    switchCallback(data) {
+      this.toastText = data ? '您打开了开关' : '开关被关闭';
+      this.$apply();
+    }
+  };
+}
+</script>

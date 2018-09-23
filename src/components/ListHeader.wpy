@@ -1,0 +1,48 @@
+<style lang="less">
+.list__header {
+  padding: 58rpx 0 58rpx 58rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0;
+  background: #f8f8f8;
+  image {
+    margin-right: 26rpx;
+    height: 100rpx;
+    width: 100rpx;
+    box-shadow: 0 4rpx 20rpx 0 rgba(153, 153, 153, 0.1);
+    border-radius: 20rpx;
+    overflow: hidden;
+  }
+  text {
+    font-size: 36rpx;
+    color: #cca553;
+  }
+}
+</style>
+<template>
+  <view class="list__header {{className}}">
+    <image src="{{icon}}" />
+    <text>{{text}}</text>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class ListHeader extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      default: ''
+    }
+  };
+}
+</script>

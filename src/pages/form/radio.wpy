@@ -1,0 +1,77 @@
+<style lang="less">
+.radio {
+  flex: 1;
+  padding-top: 32rpx;
+  padding-bottom: 32rpx;
+  border-bottom: 1rpx solid #ebebeb;
+}
+.radio__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0;
+  .hg__radio {
+    margin-right: 20rpx;
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Radio 单选框" />
+    <view class="body">
+      <baseItem title="基本用法">
+        <block slot="inner">
+          <baseRadio className="radio__row" :params.sync="sex" />
+        </block>
+      </baseItem>
+      <defaultItem title="默认值">
+        <block slot="inner">
+          <colRadio radioClassName="radio" :defaultValue.sync="defaultSex" :params.sync="sex" />
+        </block>
+      </defaultItem>
+      <disabledItem title="禁用">
+        <block slot="inner">
+          <disabledRadio radioClassName="radio" :params.sync="country" :defaultValue.sync="defaultCountry" />
+        </block>
+      </disabledItem>
+      <descItem title="带有描述信息">
+        <block slot="inner">
+          <descRadio radioClassName="radio" :params.sync="desc" />
+        </block>
+      </descItem>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import radioItem from 'components/Form/Radio';
+export default class RadioPage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    baseItem: item,
+    defaultItem: item,
+    disabledItem: item,
+    descItem: item,
+    baseRadio: radioItem,
+    colRadio: radioItem,
+    disabledRadio: radioItem,
+    descRadio: radioItem
+  };
+  data = {
+    sex: [{ value: '男', checked: true }, { value: '女' }],
+    defaultSex: '男',
+    country: [{ value: '中国', disabled: true, checked: true }],
+    defaultCountry: '中国',
+    desc: [
+      { value: '标题一', desc: '描述信息' },
+      { value: '标题二', desc: '描述信息' }
+    ]
+  };
+}
+</script>

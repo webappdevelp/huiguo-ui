@@ -1,0 +1,131 @@
+<style lang="less">
+.hg__popup {
+  visibility: hidden;
+  &[data-active='true'] {
+    visibility: visible;
+    .hg__popup__bg {
+      opacity: 1;
+    }
+    .hg__popup__box {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  &__bg,
+  &__box {
+    position: fixed;
+    z-index: 50;
+    transition: all .3s ease;
+  }
+  &__bg {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    background: rgba(0,0,0,.45);
+  }
+  &__box {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    transform: translate3d(0, 120%, 0);
+  }
+  &__header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 96rpx;
+    line-height: 96rpx;
+    font-size: 36rpx;
+    color: #333;
+    text-align: center;
+    border-bottom: 1rpx solid #ebebeb;
+    box-sizing: border-box;
+  }
+  &__close {
+    position: absolute;
+    right: 20rpx;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+  }
+  &__body {
+    max-height: 754rpx;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .hg__btn {
+    border-radius: 0;
+  }
+}
+</style>
+<template>
+  <view class="hg__popup" data-active="{{show}}">
+    <view class="hg__popup__bg" />
+    <view class="hg__popup__box">
+      <view class="hg__popup__header">
+        {{title}}
+        <iconBtn className="hg__popup__close" icon="/images/common/close.png" @callback.user="close" />
+      </view>
+      <view class="hg__popup__body">
+        <slot name="body" />
+      </view>
+      <block wx:if="{{!!btnText.length}}">
+        <btn :className.sync="btnClassName" :text.sync="btnText" @callback.user="handleClick" />
+      </block>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import iconBtn from 'components/Icon';
+import btn from 'components/Btn';
+export default class Popup extends wepy.component {
+  closePopup() {
+    this.show = false;
+    this.$apply();
+  }
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    show: {
+      type: Boolean,
+      twoWay: true,
+      default: false
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    btnClassName: {
+      type: String,
+      default: ''
+    },
+    btnText: {
+      type: String,
+      default: ''
+    },
+    callback: {
+      type: Function
+    }
+  };
+  components = {
+    iconBtn,
+    btn
+  };
+  methods = {
+    handleClick() {
+      this.closePopup();
+      this.$emit('callback');
+    },
+    close() {
+      this.closePopup();
+    }
+  };
+}
+</script>

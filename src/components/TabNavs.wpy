@@ -1,0 +1,125 @@
+<style lang="less">
+.hg__tabnavs {
+  display: flex;
+  flex-direction: row;
+  height: 80rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ebebeb;
+  &__scroll {
+    height: 80rpx;
+    font-size: 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  &__inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 0;
+  }
+}
+.hg__tabnav {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 0;
+  &__inline {
+    display: inline-block;
+    min-width: 160rpx;
+    text-align: center;
+  }
+  &__text {
+    position: relative;
+    line-height: 80rpx;
+    font-size: 28rpx;
+    color: #999;
+    max-width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      height: 4rpx;
+      width: 76rpx;
+      background: transparent;
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+  &.active {
+    .hg__tabnav__text {
+      color: #333;
+      &::after {
+        background: #E0BE75;
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view class="hg__tabnavs">
+    <scroll-view class="hg__tabnavs__scroll" scroll-x scroll-with-animation scroll-into-view="item-{{currentIndex}}">
+      <block wx:if="{{lists.length > 5}}">
+        <block wx:for="{{lists}}" wx:key="index">
+          <view class="hg__tabnav hg__tabnav__inline {{itemClassName}} {{currentIndex === index ? itemActiveClassName : ''}}" id="item-{{index}}" data-id="{{index}}" @tap="handleClick">
+            <view class="hg__tabnav__text">{{item}}</view>
+          </view>
+        </block>
+      </block>
+      <block wx:else>
+        <view class="hg__tabnavs__inner">
+          <block wx:for="{{lists}}" wx:key="index">
+            <view class="hg__tabnav {{itemClassName}} {{currentIndex === index ? itemActiveClassName : ''}}" id="item-{{index}}" data-id="{{index}}" @tap="handleClick">
+              <view class="hg__tabnav__text">{{item}}</view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class TabNavs extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    itemClassName: {
+      type: String,
+      default: ''
+    },
+    itemActiveClassName: {
+      type: String,
+      default: 'active'
+    },
+    lists: {
+      type: Array,
+      default: []
+    },
+    currentIndex: {
+      type: Number,
+      twoWay: true,
+      default: 0
+    },
+    callback: {
+      type: Function
+    }
+  };
+  methods = {
+    handleClick(event) {
+      let { dataset } = event.currentTarget;
+      let { id } = dataset;
+      this.currentIndex = id;
+      this.$apply();
+    }
+  };
+}
+</script>

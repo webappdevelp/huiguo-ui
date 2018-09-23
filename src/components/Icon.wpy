@@ -1,0 +1,87 @@
+<style lang="less">
+.hg__icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0;
+  &__right,
+  &__left {
+    flex-direction: row;
+    .hg__icon__pic + .hg__icon__text,
+    .hg__icon__text + .hg__icon__pic {
+      margin-left: 14rpx;
+    }
+  }
+  &__pic {
+    width: 48rpx;
+    height: 48rpx;
+  }
+  &__text {
+    font-size: 20rpx;
+  }
+}
+</style>
+<template>
+  <view class="hg__icon hg__icon__{{iconDirection}} {{className}} {{actived ? activedClassName : ''}}" @tap="handleClick">
+    <block wx:if="{{iconDirection === 'right' || iconDirection === 'down'}}">
+      <text wx:if="{{!!text.length}}" class="hg__icon__text">{{actived ? activedText : text}}</text>
+      <image src="{{actived ? activedIcon : icon}}" class="hg__icon__pic" />
+    </block>
+    <block wx:else>
+      <image src="{{actived ? activedIcon : icon}}" class="hg__icon__pic" />
+      <text wx:if="{{!!text.length}}" class="hg__icon__text">{{actived ? activedText : text}}</text>
+    </block>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class Icon extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    activedClassName: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: ''
+    },
+    actived: {
+      type: Boolean,
+      default: false
+    },
+    activedIcon: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      default: ''
+    },
+    activedText: {
+      type: String,
+      default: ''
+    },
+    iconDirection: {
+      type: String,
+      default: 'up'
+    },
+    params: {
+      type: Object | String,
+      default: {} | ''
+    },
+    callback: {
+      type: Function
+    }
+  };
+  methods = {
+    handleClick(event) {
+      this.$emit('callback', this.params);
+    }
+  };
+}
+</script>

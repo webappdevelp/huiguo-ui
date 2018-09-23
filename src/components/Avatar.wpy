@@ -1,0 +1,43 @@
+<style lang="less">
+.hg__avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  image {
+    width: 64rpx;
+    height: 64rpx;
+  }
+}
+</style>
+<template>
+  <view class="hg__avatar {{className}}" style="width: {{width}}; height: {{height}};">
+    <image style="width: {{width}}; height: {{height}};" src="{{ avatar || '/images/avatar/avatar.png'}}" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class Avatar extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    width: {
+      type: String,
+      default: ''
+    },
+    height: {
+      type: String,
+      default: ''
+    },
+    avatar: {
+      type: String,
+      default: ''
+    }
+  }
+}
+</script>

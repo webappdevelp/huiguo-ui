@@ -1,0 +1,101 @@
+<style lang="less">
+.hg__rich__lists {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 0;
+  padding: 0 28rpx;
+  max-width: 100%;
+}
+.hg__rich__list__item {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 0;
+  padding: 30rpx 0;
+  width: 100%;
+  & + & {
+    border-top: 1rpx solid #ebebeb;
+  }
+  &__pic {
+    display: block;
+    width: 230rpx;
+    height: 144rpx;
+  }
+  &__pic + &__inner,
+  &__inner + &__pic {
+    margin-left: 28rpx;
+  }
+  &__inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  &__title {
+    max-height: 84rpx;
+    font-size: 30rpx;
+    color: #333;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+  }
+  &__desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 76rpx;
+    line-height: 38rpx;
+    font-size: 24rpx;
+    color: #666;
+    overflow: hidden;
+  }
+}
+</style>
+<template>
+  <view class="hg__rich__lists {{className}}">
+    <repeat for="{{lists}}" key="index">
+      <block wx:if="{{item['picDirection'] === 'right'}}">
+        <navigator class="hg__rich__list__item" url="{{item['link']}}" hover-class="none">
+          <view class="hg__rich__list__item__inner">
+            <view class="hg__rich__list__item__title">{{item['title']}}</view>
+            <view class="hg__rich__list__item__desc">{{item['desc']}}</view>
+          </view>
+          <image src="{{item['pic']}}" class="hg__rich__list__item__pic" />
+        </navigator>
+      </block>
+      <block wx:else>
+        <navigator class="hg__rich__list__item" url="{{item['link']}}" hover-class="none">
+          <image src="{{item['pic']}}" class="hg__rich__list__item__pic" />
+          <view class="hg__rich__list__item__inner">
+            <view class="hg__rich__list__item__title">{{item['title']}}</view>
+            <view class="hg__rich__list__item__desc">{{item['desc']}}</view>
+          </view>
+        </navigator>
+      </block>
+    </repeat>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class RichList extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    lists: {
+      type: Array,
+      default: []
+    }
+  };
+}
+</script>

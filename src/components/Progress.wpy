@@ -1,0 +1,43 @@
+<style lang="less">
+.hg__progress {
+  position: relative;
+  height: 10rpx;
+  border-radius: 4rpx;
+  background: #f4f4f4;
+  width: 100%;
+  overflow: hidden;
+  &__bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 200rpx;
+    background:  #E0BE75;
+    transition: all .3s linear;
+  }
+}
+</style>
+<template>
+  <view class="hg__progress {{className}}">
+    <view class="hg__progress__bar {{barClassName}}" style="width: {{value}}%" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class Progress extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    barClassName: {
+      type: String,
+      default: ''
+    },
+    value: {
+      type: Number,
+      default: 0
+    }
+  };
+}
+</script>

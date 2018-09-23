@@ -1,0 +1,132 @@
+<style lang="less">
+.body,
+.page__item__inner {
+  padding-right: 0;
+  padding-left: 0;
+  background: #f7f7f8;
+}
+.page__item__title {
+  margin-left: 66rpx;
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Good 商品布局" />
+    <view class="body">
+      <twoCol title="单行两个布局" >
+        <block slot="inner">
+          <twoSpan :goods.sync="goods" />
+        </block>
+      </twoCol>
+      <oneCol title="单行一个布局" >
+        <block slot="inner">
+          <oneSpan :goods.sync="goods" />
+        </block>
+      </oneCol>
+      <bigCol title="单行一个布局(大图)" >
+        <block slot="inner">
+          <bigSpan :goods.sync="goods" />
+        </block>
+      </bigCol>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import twoSpan from 'components/Good/TwoSpan';
+import oneSpan from 'components/Good/OneSpan';
+import bigSpan from 'components/Good/BigSpan';
+export default class Good extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    twoCol: item,
+    oneCol: item,
+    bigCol: item,
+    twoSpan,
+    oneSpan,
+    bigSpan
+  };
+  data = {
+    goods: [
+      {
+        title: '产地直供 云南天山雪莲果 8斤送1斤实发9斤单果100-500克多规格',
+        pic:
+          'https://goods6.huiguo.net/goods/180816/a/c/5b752ecf33b0895b3e6de622_800x800.jpg?imageMogr2/quality/88!/format/jpg',
+        long_pic:
+          'https://goods5.huiguo.net/goods/180910/8/f/5b95d0c9b6f8ea0476768019_750x350.jpg?iopcmd=convert&Q=88&dst=jpg',
+        tags: [
+          {
+            text: '直供',
+            className: 'ghost'
+          },
+          {
+            text: '满件减',
+            className: 'primary ghost'
+          }
+        ],
+        sale_price: '20',
+        profit: '2',
+        sale_text: '200人已购买',
+        needBtn: true,
+        btnClassName: 'hg__goodbtn second ghost',
+        btnText: '分享赚钱',
+        btnSize: 'small'
+      },
+      {
+        title: 'AHC 第二代B5玻尿酸水+乳 120ml*2',
+        long_pic:
+          'https://goods5.huiguo.net/goods/180910/8/f/5b95d0c9b6f8ea0476768019_750x350.jpg?iopcmd=convert&Q=88&dst=jpg',
+        pic:
+          'https://goods2.huiguo.net/goods/180519/3/8/5aff97a4b6f8ea5b221c8e3e_800x800.jpg?imageMogr2/quality/88!/format/jpg',
+        tags: [{ text: '限时购', className: 'primary' }],
+        sale_price: '20',
+        profit: '2',
+        country: 'https://static.huiguo.net/seller/images/icons/14.png',
+        over: '已抢光',
+        sale_text: '200人已购买',
+        needBtn: true,
+        btnClassName: 'hg__goodbtn',
+        btnIcon: '/images/common/share.png'
+      },
+      {
+        title: 'AHC 第二代B5玻尿酸水+乳 120ml*2',
+        long_pic:
+          'https://goods5.huiguo.net/goods/180910/8/f/5b95d0c9b6f8ea0476768019_750x350.jpg?iopcmd=convert&Q=88&dst=jpg',
+        pic:
+          'https://goods2.huiguo.net/goods/180519/3/8/5aff97a4b6f8ea5b221c8e3e_800x800.jpg?imageMogr2/quality/88!/format/jpg',
+        tags: [{ text: '限时购', className: 'primary' }],
+        sale_price: '20',
+        profit: '2',
+        country: 'https://static.huiguo.net/seller/images/icons/14.png',
+        over: '已抢光',
+        sale_text: '200人已购买'
+      },
+      {
+        title: '产地直供 云南天山雪莲果 8斤送1斤实发9斤单果100-500克多规格',
+        long_pic:
+          'https://goods5.huiguo.net/goods/180910/8/f/5b95d0c9b6f8ea0476768019_750x350.jpg?iopcmd=convert&Q=88&dst=jpg',
+        pic:
+          'https://goods6.huiguo.net/goods/180816/a/c/5b752ecf33b0895b3e6de622_800x800.jpg?imageMogr2/quality/88!/format/jpg',
+        tags: [
+          {
+            text: '直供',
+            className: 'ghost'
+          },
+          {
+            text: '满件减',
+            className: 'primary ghost'
+          }
+        ],
+        sale_price: '20',
+        profit: '2',
+        sale_text: '200人已购买'
+      }
+    ]
+  };
+}
+</script>

@@ -1,0 +1,42 @@
+<style lang="less">
+</style>
+<template>
+  <view class="container">
+    <listHeader icon="/images/pages/views.png" text="视图" />
+    <lists :lists="lists" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import listHeader from 'components/ListHeader';
+import lists from 'components/ListNavs';
+export default class Views extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    listHeader,
+    lists
+  };
+  data = {
+    lists: [
+      {
+        link: '/pages/views/avatar',
+        text: 'Avatar 头像'
+      },
+      {
+        link: '/pages/views/badge',
+        text: 'Badge 徽标'
+      },
+      {
+        link: '/pages/views/notice',
+        text: 'NoticeBar 通知栏'
+      },
+      {
+        link: '/pages/views/tag',
+        text: 'Tag  标签'
+      }
+    ]
+  };
+}
+</script>

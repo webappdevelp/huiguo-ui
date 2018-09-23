@@ -1,0 +1,57 @@
+<style lang="less">
+</style>
+<template>
+  <view class="container">
+    <listHeader icon="/images/pages/action.png" text="操作反馈" />
+    <lists :lists="lists" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import listHeader from 'components/ListHeader';
+import lists from 'components/ListNavs';
+export default class Actions extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    listHeader,
+    lists
+  };
+
+  mixins = [];
+
+  data = {
+    lists: [
+      {
+        link: '/pages/action/sheet',
+        text: 'ActionSheet 动作面板'
+      },
+      {
+        link: '/pages/action/popup',
+        text: 'Popup 弹出窗'
+      },
+      {
+        link: '/pages/action/modal',
+        text: 'Modal 模态框'
+      },
+      {
+        link: '/pages/action/progress',
+        text: 'Progress 进度条'
+      },
+      {
+        link: '/pages/action/toast',
+        text: 'Toast 提示'
+      }
+    ]
+  };
+
+  computed = {};
+
+  methods = {};
+
+  events = {};
+
+  onLoad() {}
+}
+</script>

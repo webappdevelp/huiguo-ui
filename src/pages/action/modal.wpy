@@ -1,0 +1,130 @@
+<style lang="less">
+.btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0;
+  width: 100%;
+  .hg__btn {
+    margin-bottom: 40rpx;
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Modal 模态框" />
+    <view class="body">
+      <item title="用法">
+        <block slot="inner">
+          <view class="btns">
+            <repeat for="{{btns}}" key="index">
+              <btn className="ghost" :text="item['text']" :params="item" @callback.user="btnClick" />
+            </repeat>
+          </view>
+        </block>
+      </item>
+    </view>
+    <modal :show.sync="modalShow" :title.sync="modalTitle" :btns.sync="modalBtns" @callback.user="modalCallback">
+      <block slot="body">
+        {{modalContent}}
+      </block>
+    </modal>
+    <toast :text.sync="toastText" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import modal from 'components/Modal';
+import btn from 'components/Btn';
+import toast from 'components/Toast';
+export default class Modal extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    item,
+    modal,
+    btn,
+    toast
+  };
+  data = {
+    showToast: false,
+    toastText: '',
+    modalShow: false,
+    modalTitle: '友情提示',
+    modalBtns: [
+      {
+        type: 'cancel',
+        text: '取消'
+      },
+      {
+        type: 'confirm',
+        text: '确定'
+      }
+    ],
+    modalContent: '我是内容我是内容我是内容我是我是内容我是内容我是内容',
+    btns: [
+      {
+        type: 'base',
+        text: '打开 - 基本用法'
+      },
+      {
+        type: 'noTitle',
+        text: '打开 - 无标题'
+      },
+      {
+        type: 'single',
+        text: '打开 - 单个按钮'
+      }
+    ]
+  };
+  methods = {
+    btnClick(data) {
+      // console.log(data);
+      let { type } = data;
+      switch (type) {
+        case 'noTitle':
+          this.modalTitle = '';
+          break;
+        case 'close':
+          this.showModalClose = true;
+          break;
+        case 'single':
+          this.modalBtns = [{ type: 'confirm', text: '确定' }];
+          break;
+        case 'base':
+        default:
+          this.modalBtns = [
+            {
+              type: 'cancel',
+              text: '取消'
+            },
+            {
+              type: 'confirm',
+              text: '确定'
+            }
+          ];
+          break;
+      }
+      this.modalShow = true;
+      this.$apply();
+    },
+    modalCallback(data) {
+      let { type } = data;
+      if (type === 'cancel' && this.modalBtns.length > 1) {
+        this.toastText = `您点击了${this.modalBtns[0]['type']}`;
+      } else if (this.modalBtns.length > 1) {
+        this.toastText = `您点击了${this.modalBtns[1]['type']}`;
+      } else {
+        this.toastText = `您点击了${this.modalBtns[0]['type']}`;
+      }
+      this.showToast = true;
+      this.$apply();
+    }
+  };
+}
+</script>

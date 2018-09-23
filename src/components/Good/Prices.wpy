@@ -1,0 +1,88 @@
+<style lang="less">
+.hg__goodprices {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 44rpx;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.hg__goodprices__sale {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 32rpx;
+  color: #333;
+}
+.hg__goodprices__profit {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 28rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #d64040;
+  &::before {
+    content: '/';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    color: #d8d8d8;
+    font-size: 20rpx;
+    transform: translate3d(10rpx, -50%, 0);
+  }
+}
+.hg__goodprices__profitprev {
+  margin-right: 4rpx;
+  font-size: 24rpx;
+  font-weight: 400;
+}
+</style>
+<template>
+  <view class="hg__goodprices {{className}}">
+    <view class="hg__goodprices__sale {{saleClassName}}">
+      <text class="hg__goodprices__saleunit">¥</text>
+      <text class="hg__goodprices__saleprice">{{saleText}}</text>
+    </view>
+    <view class="hg__goodprices__profit {{profitClassName}}">
+      <text class="hg__goodprices__profitprev">{{profitPrevText}}</text>
+      <text class="hg__goodprices__profitunit">¥</text>
+      <text class="hg__goodprices__profitprice">{{profit}}</text>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class Prices extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    saleClassName: {
+      type: String,
+      default: ''
+    },
+    profitClassName: {
+      type: String,
+      default: ''
+    },
+    saleText: {
+      type: String,
+      default: ''
+    },
+    profitPrevText: {
+      type: String,
+      default: '返'
+    },
+    profit: {
+      type: String,
+      default: ''
+    }
+  };
+}
+</script>

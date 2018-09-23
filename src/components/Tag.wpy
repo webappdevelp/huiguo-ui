@@ -1,0 +1,61 @@
+<style lang="less">
+.hg__tag {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 26rpx;
+  min-width: 28rpx;
+  font-size: 20rpx;
+  background: #DEC07E;
+  border: 1rpx solid #DEC07E;
+  border-radius: 2rpx;
+  color: #fff;
+  &__more-text {
+    padding: 0 6rpx;
+  }
+  &__has-radius {
+    height: 30rpx;
+    padding: 0 12rpx;
+    border-radius: 200rpx;
+  }
+  &.primary {
+    background: #D64040;
+    border-color: #D64040;
+  }
+  &.disabled {
+    background: #bbb;
+    border-color: #bbb;
+  }
+  &.ghost {
+    background: transparent;
+    border-color: currentColor;
+    color: #DEC07E;
+  }
+  &.primary.ghost {
+    color: #D64040;
+  }
+}
+</style>
+<template>
+  <view class="hg__tag {{text.length > 1 ? 'hg__tag__more-text' : ''}} {{radius ? 'hg__tag__has-radius' : ''}} {{className}}">{{text}}</view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class Tag extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      default: ''
+    },
+    radius: {
+      type: Boolean,
+      default: false
+    }
+  }
+}
+</script>

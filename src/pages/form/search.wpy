@@ -1,0 +1,15 @@
+<style lang="less">
+
+</style>
+<template>
+  
+</template>
+<script>
+import wepy from 'wepy';
+export default class SearchPage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  data = {};
+}
+</script>

@@ -1,0 +1,203 @@
+<style lang="less">
+.item__desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 24rpx;
+  color: #666;
+  text + text {
+    line-height: 34rpx;
+    font-size: 20rpx;
+    color: #cca553;
+  }
+}
+.big__btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0;
+  width: 100%;
+  .hg__btn {
+    margin-top: 48rpx;
+  }
+}
+.normal__btns {
+  .hg__btn {
+    margin-top: 48rpx;
+  }
+}
+.small__btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 0;
+  .hg__btn {
+    margin-top: 34rpx;
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Button 按钮" />
+    <view class="body">
+      <bigBtns title="大按钮">
+        <block slot="inner">
+          <view class="item__desc">尺寸：347*48px     字体大小：18px     圆角：2px</view>
+          <view class="big__btns">
+            <repeat for="{{bigs}}" key="index">
+              <bigBtn :className="item['className']" size="big" :text="item['text']" :desc="item['desc']" icon="item['icon']" />
+            </repeat>
+          </view>
+        </block>
+      </bigBtns>
+      <normalBtns title="中按钮">
+        <block slot="inner">
+          <view class="item__desc">
+            <text>尺寸：N*40px 字体大小：16px</text>
+            <text>注：高度40px，宽度最小200px，根据文案自定义，左右各加16px</text>
+          </view>
+          <view class="normal__btns">
+            <repeat for="{{normals}}" key="index">
+              <normalBtn :className="item['className']" :text="item['text']" :desc="item['desc']" icon="item['icon']" />
+            </repeat>
+          </view>
+        </block>
+      </normalBtns>
+      <smallBtns title="小按钮">
+        <block slot="inner">
+          <view class="item__desc">
+            <text>尺寸：N*28px 字体大小：12px</text>
+            <text>注：高度28px，宽度最小66px，根据文案自定义，左右各加12px</text>
+          </view>
+          <view class="small__btns">
+            <repeat for="{{smalls}}" key="index">
+              <smallBtn :className="item['className']" :text="item['text']" size="small" />
+            </repeat>
+          </view>
+        </block>
+      </smallBtns>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import btn from 'components/Btn';
+export default class Btns extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    bigBtns: item,
+    normalBtns: item,
+    smallBtns: item,
+    bigBtn: btn,
+    normalBtn: btn,
+    smallBtn: btn
+  };
+  data = {
+    bigs: [
+      {
+        text: '主要操作 Normal',
+        className: 'big'
+      },
+      {
+        text: '长按钮主标题 Normal',
+        desc: '长按钮副文本副文本 Normal'
+      },
+      {
+        text: '主要操作 Loading',
+        icon: '/images/common/loading.gif'
+      },
+      {
+        text: '主要操作 Disable',
+        className: 'disabled'
+      },
+      {
+        text: '主要操作线框 Normal',
+        className: 'ghost'
+      },
+      {
+        text: '长按钮主标题 Normal',
+        desc: '长按钮副文本副文本 Normal',
+        className: 'ghost'
+      },
+      {
+        text: '主要操作线框 Disable',
+        className: 'ghost disabled'
+      },
+      {
+        text: '辅助操作线框 Normal',
+        className: 'second ghost'
+      },
+      {
+        text: '辅助操作线框 Disable',
+        className: 'ghost second disabled'
+      }
+    ],
+    normals: [
+      {
+        text: '短按钮 Normal'
+      },
+      {
+        text: '短按钮主标题 Normal',
+        desc: '短按钮副文本 Normal'
+      },
+      {
+        text: '短按钮 Disable',
+        className: 'disabled'
+      },
+      {
+        text: '短按钮 Normal',
+        className: 'ghost'
+      },
+      {
+        text: '短按钮主标题 Normal',
+        desc: '短按钮副文本 Normal',
+        className: 'ghost'
+      },
+      {
+        text: '短按钮 Disable',
+        className: 'ghost disabled'
+      },
+      {
+        text: '辅助短按钮 Normal',
+        className: 'second ghost'
+      },
+      {
+        text: '辅助短按钮 Disabled',
+        className: 'second ghost disabled'
+      }
+    ],
+    smalls: [
+      {
+        text: ' 我是按钮'
+      },
+      {
+        text: '按钮 Disable',
+        className: 'disabled'
+      },
+      {
+        text: '我是按钮',
+        className: 'ghost'
+      },
+      {
+        text: '按钮 Disable',
+        className: 'ghost disabled'
+      },
+      {
+        text: '辅助按钮',
+        className: 'second ghost'
+      },
+      {
+        text: 'Disabled',
+        className: 'second ghost disabled'
+      }
+    ]
+  };
+}
+</script>

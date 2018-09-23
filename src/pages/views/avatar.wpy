@@ -1,0 +1,86 @@
+<style lang="less">
+.avatars {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.hg__avatar + .hg__avatar {
+  margin-left: 46rpx;
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Avatar 头像" />
+    <view class="body">
+      <defaultItem title="默认头像">
+        <block slot="inner">
+          <view class="avatars">
+            <repeat for="{{lists}}" key="index">
+              <avatar :avatar="item['avatar']" :width="item['width']" :height="item['height']" />
+            </repeat>
+          </view>
+        </block>
+      </defaultItem>
+      <serviceItem title="客服头像">
+        <block slot="inner">
+          <view class="avatars">
+            <serviceAvatar avatar="/images/avatar/service.png" width="80rpx" height="80rpx" />
+          </view>
+        </block>
+      </serviceItem>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import avatar from 'components/Avatar';
+export default class Avatars extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    defaultItem: item,
+    serviceItem: item,
+    avatar,
+    serviceAvatar: avatar
+  };
+  data = {
+    lists: [
+      {
+        avatar: '/images/avatar/avatar.png',
+        width: '40rpx',
+        height: '40rpx'
+      },
+      {
+        avatar: '/images/avatar/avatar.png',
+        width: '48rpx',
+        height: '48rpx'
+      },
+      {
+        avatar: '/images/avatar/avatar.png',
+        width: '64rpx',
+        height: '64rpx'
+      },
+      {
+        avatar: '/images/avatar/avatar.png',
+        width: '72rpx',
+        height: '72rpx'
+      },
+      {
+        avatar: '/images/avatar/avatar.png',
+        width: '84rpx',
+        height: '84rpx'
+      },
+      {
+        avatar: '/images/avatar/avatar.png',
+        width: '112rpx',
+        height: '112rpx'
+      }
+    ]
+  };
+}
+</script>

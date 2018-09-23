@@ -1,0 +1,139 @@
+<style lang="less">
+.hg__input {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 28rpx 0;
+  font-size: 0;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ebebeb;
+  max-width: 100%;
+  overflow: hidden;
+  &__label {
+    font-size: 30rpx;
+    color: #333;
+    // min-width: 180rpx;
+    &-disabled {
+      color: #999;
+    }
+  }
+  &__label + &__inner {
+    margin-left: 28rpx;
+  }
+  &__inner {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 0;
+  }
+  &__input {
+    flex: 1;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    color: #333;
+    &-disabled {
+      color: #999;
+    }
+  }
+  &__close {
+
+  }
+}
+</style>
+<template>
+  <view class="hg__input">
+    <view wx:if="{{!!label.length}}" class="hg__input__label {{disabled ? 'hg__input__label-disabled' : ''}} {{labelClassName}}">{{label}}</view>
+    <view class="hg__input__inner">
+      <input type="{{type}}" name="{{name}}" value="{{value}}" class="hg__input__input {{disabled ? 'hg__input__input-disabled' : ''}}" disabled="{{disabled}}" maxlength="{{maxLength}}" password="{{password}}" placeholder="{{placeholder}}" placeholder-class="{{placeholderClassName}}" @input="inputChange" />
+      <block wx:if="{{showClear}}">
+        <clearBtn :icon.sync="clearIcon" :className.sync="clearClassName" @callback.user="clearInput" />
+      </block>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import clearBtn from 'components/Icon';
+export default class InputItem extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    label: {
+      type: String,
+      default: ''
+    },
+    labelClassName: {
+      type: String,
+      default: ''
+    },
+    type: {
+      type: String,
+      default: 'text'
+    },
+    name: {
+      type: String,
+      default: 'text'
+    },
+    value: {
+      type: String,
+      twoWay: true,
+      default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    password: {
+      type: Boolean,
+      default: false
+    },
+    maxLength: {
+      type: Number,
+      default: -1
+    },
+    placeholder: {
+      type: String,
+      default: '请输入'
+    },
+    placeholderClassName: {
+      type: String,
+      default: 'placeholder'
+    },
+    callback: {
+      type: Function
+    },
+    showClear: {
+      type: Boolean,
+      default: false
+    },
+    clearIcon: {
+      type: String,
+      default: '/images/common/close.png'
+    },
+    clearClassName: {
+      type: String,
+      default: ''
+    }
+  };
+  components = {
+    clearBtn
+  };
+  methods = {
+    inputChange(event) {
+      let { value } = event.detail;
+      this.value = value;
+      this.$apply();
+    },
+    clearInput() {
+      this.value = '';
+      this.$apply();
+    }
+  };
+}
+</script>

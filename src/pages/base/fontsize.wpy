@@ -1,0 +1,165 @@
+<style lang="less">
+.body {
+  padding: 24rpx 28rpx 100rpx;
+}
+.page__item__inner {
+  width: 100%;
+  box-sizing: border-box;
+}
+.demo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 20rpx;
+  &__title {
+    flex: 1;
+    font-size: 24rpx;
+    color: #666;
+    text {
+      font-size: 28rpx;
+      color: #333;
+    }
+  }
+  &__li {
+    margin-top: 26rpx;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 76rpx;
+    padding: 0 24rpx;
+    background: #FFF9F0;
+    font-size: 24rpx;
+    border-radius: 4rpx;
+    color: #666;
+    width: 100%;
+    box-sizing: border-box;
+    .size {
+      width: 116rpx;
+    }
+    .desc {
+      flex: 1;
+    }
+    .lh {
+      width: 86rpx;
+      text-align: right;
+    }
+  }
+}
+.li {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 170rpx;
+  padding: 0 24rpx;
+  font-size: 0;
+  color: #333;
+  border-radius: 4rpx;
+  &.eve {
+    background: #fcfcfc;
+  }
+  &__size {
+    width: 166rpx;
+  }
+  &__desc {
+    flex: 1;
+    font-size: 26rpx;
+    line-height: 36rpx;
+  }
+  &__lh {
+    width: 86rpx;
+    font-size: 26rpx;
+    text-align: right;
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Typography 字体" />
+    <view class="body">
+      <item title="标准字体">
+        <block slot="inner">
+          <view class="demo">
+            <view class="demo__title">
+              <text>示例</text>（行高为字号大小的1.4倍）
+            </view>
+            <view class="demo__li">
+              <text class="size">字号</text>
+              <text class="desc"></text>
+              <text class="lh">行高</text>
+            </view>
+          </view>
+          <view class="li">
+            <text class="li__size" style="font-size: 64rpx">24pt</text>
+            <text class="li__desc">特殊数字金额和大字标题</text>
+            <text class="li__lh">44px</text>
+          </view>
+          <view class="li eve">
+            <text class="li__size" style="font-size: 44rpx">20pt</text>
+            <text class="li__desc">运营Banner内主标题和特殊用途的大字体</text>
+            <text class="li__lh">30px</text>
+          </view>
+          <view class="li">
+            <text class="li__size" style="font-size: 36rpx">18pt</text>
+            <text class="li__desc">大按钮文字，页面顶部主标题</text>
+            <text class="li__lh">24px</text>
+          </view>
+          <view class="li eve">
+            <text class="li__size" style="font-size: 32rpx">16pt</text>
+            <text class="li__desc">中等按钮文字、顶部Tab文字、段落、列表文本等</text>
+            <text class="li__lh">20px</text>
+          </view>
+          <view class="li">
+            <text class="li__size" style="font-size: 28rpx">14pt</text>
+            <text class="li__desc">列表内辅助信息文本、列表次级文本信息</text>
+            <text class="li__lh">18px</text>
+          </view>
+          <view class="li eve">
+            <text class="li__size" style="font-size: 26rpx">13pt</text>
+            <text class="li__desc">次级辅助文本信息</text>
+            <text class="li__lh">18px</text>
+          </view>
+          <view class="li">
+            <text class="li__size" style="font-size: 24rpx">12pt</text>
+            <text class="li__desc">小按钮文字、辅助说明信息、图标说明文本</text>
+            <text class="li__lh">16px</text>
+          </view>
+          <view class="li eve">
+            <text class="li__size" style="font-size: 22rpx">11pt</text>
+            <text class="li__desc">首页入口图标文字等</text>
+            <text class="li__lh">15px</text>
+          </view>
+          <view class="li">
+            <text class="li__size" style="font-size: 20rpx">10pt</text>
+            <text class="li__desc">底部Tab、运营标签图标、部分图标文本、TAG信息</text>
+            <text class="li__lh">14px</text>
+          </view>
+          <view class="li eve">
+            <text class="li__size" style="font-size: 18rpx">9pt</text>
+            <text class="li__desc">特殊位置及标签文案的应用</text>
+            <text class="li__lh">12px</text>
+          </view>
+        </block>
+      </item>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+export default class FontSize extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    item
+  };
+  data = {};
+}
+</script>

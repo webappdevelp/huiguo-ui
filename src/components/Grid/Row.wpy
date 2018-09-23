@@ -1,0 +1,57 @@
+<style lang="less">
+.hg__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 0;
+  padding: 0 28rpx;
+  box-sizing: border-box;
+  &__no-gutters {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+</style>
+<template>
+  <view class="hg__row {{noGutters ? 'hg__row__no-gutters' : ''}} {{className}}" style="flex-direction: {{direction}}; justify-content: {{justifyContent}}; align-items: {{alignItems}}; flex-wrap: {{wrap}}">
+    <slot name="row" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class Row extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    noGutters: {
+      type: Boolean,
+      default: false
+    },
+    direction: {
+      type: String,
+      default: ''
+    },
+    justifyContent: {
+      type: String,
+      default: ''
+    },
+    alignItems: {
+      type: String,
+      default: ''
+    },
+    wrap: {
+      type: String,
+      default: 'no-wrap'
+    }
+  };
+  watch = {
+    noGutters(value) {
+      console.log(value);
+      return value;
+    }
+  }
+}
+</script>

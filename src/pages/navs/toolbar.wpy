@@ -1,0 +1,175 @@
+<style lang="less">
+.toolbar {
+  width: 100%;
+  &__nav {
+    color: #999;
+  }
+  &__nav__active {
+    color: #CCA553;
+  }
+}
+.toolbar__inner {
+  position: relative;
+}
+.detail__bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 0;
+  height: 100rpx;
+  width: 100%;
+  .cart,
+  .fav {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100rpx;
+    width: 114rpx;
+  }
+  .fav {
+    border-left: 1rpx solid #ebebeb;
+    box-sizing: border-box;
+  }
+  .cart__num {
+    top: 5%;
+    right: 15%;
+  }
+  .buy__btns {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 0;
+    & > view {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 36rpx;
+      height: 100rpx;
+      color: #fff;
+    }
+    .buy__only {
+      background: #2E2921;
+    }
+    .buy__cart {
+      background: #E0BE75;
+    }
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="ToolBar 底部导航" />
+    <view class="body">
+      <navbarItem title="导航切换">
+        <block slot="inner">
+          <appToolbar className="toolbar" innerClassName="toolbar__inner" :lists.sync="toolIcons" @callback.user="handleClick" />
+        </block>
+      </navbarItem>
+      <detailbarItem title="商详底部导航">
+        <block slot="inner">
+          <detailBar className="toolbar" innerClassName="toolbar__inner">
+            <view class="detail__bar" slot="inner">
+              <view class="cart">
+                <badge type="number" className="cart__num" text="4" />
+                <cartIcon icon="/images/toolbar/cart.png" text="购物车" />
+              </view>
+              <favIcon className="fav" icon="/images/common/keep.png" activedIcon="/images/common/keep_active.png" text="收藏" activedText="已收藏" activedClassName="faved" :actived.sync="favActived" @callback.user="setFav" />
+              <view class="buy__btns">
+                <view class="buy__only">立即购买</view>
+                <view class="buy__cart">加入购物车</view>
+              </view>
+            </view>
+          </detailBar>
+        </block>
+      </detailbarItem>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import toolbar from 'components/Toolbar';
+import icon from 'components/Icon';
+import badge from 'components/Badge';
+export default class Toolbar extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    navbarItem: item,
+    detailbarItem: item,
+    appToolbar: toolbar,
+    detailBar: toolbar,
+    cartIcon: icon,
+    favIcon: icon,
+    badge
+  };
+  data = {
+    toolIcons: [
+      {
+        icon: '/images/common/nav_home.png',
+        activedIcon: '/images/common/nav_home_active.png',
+        className: 'toolbar__nav',
+        activedClassName: 'toolbar__nav__active',
+        text: '首页',
+        activedText: '首页',
+        actived: true
+      },
+      {
+        icon: '/images/common/nav_classify.png',
+        activedIcon: '/images/common/nav_classify_active.png',
+        className: 'toolbar__nav',
+        activedClassName: 'toolbar__nav__active',
+        text: '分类',
+        activedText: '分类',
+        actived: false
+      },
+      {
+        icon: '/images/common/nav_cart.png',
+        activedIcon: '/images/common/nav_cart_active.png',
+        className: 'toolbar__nav',
+        activedClassName: 'toolbar__nav__active',
+        text: '购物车',
+        activedText: '购物车',
+        actived: false
+      },
+      {
+        icon: '/images/common/nav_my.png',
+        activedIcon: '/images/common/nav_my_active.png',
+        className: 'toolbar__nav',
+        activedClassName: 'toolbar__nav__active',
+        text: '我的',
+        activedText: '我的',
+        actived: false
+      }
+    ],
+    favActived: false
+  };
+  methods = {
+    handleClick(data) {
+      let { toolIcons } = this;
+      this.toolIcons = toolIcons.map(item => {
+        if (item.text === data.text) {
+          item.actived = true;
+        } else {
+          item.actived = false;
+        }
+        return item;
+      });
+      this.$apply();
+    },
+    setFav(data) {
+      this.favActived = !this.favActived;
+      this.$apply();
+    }
+  };
+}
+</script>

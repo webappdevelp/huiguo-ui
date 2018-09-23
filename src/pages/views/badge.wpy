@@ -1,0 +1,92 @@
+<style lang="less">
+.items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0;
+}
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 20rpx;
+  height: 72rpx;
+  width: 72rpx;
+  background: #f8f8f8;
+  color: #999;
+}
+.item + .item {
+  margin-left: 92rpx;
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Badge 徽标" />
+    <view class="body">
+      <numberItem title="数字">
+        <block slot="inner">
+          <view class="items">
+            <repeat for="{{numbers}}" key="index">
+              <view class="item">
+                <numberBadge :text="item" type="number" />
+                <text>ICON</text>
+              </view>
+            </repeat>
+          </view>
+        </block>
+      </numberItem>
+      <dotItem title="小红点">
+        <block slot="inner">
+          <view class="items">
+            <repeat for="{{numbers}}" key="index">
+              <view class="item">
+                <dotBadge type="dot" />
+                <text>ICON</text>
+              </view>
+            </repeat>
+          </view>
+        </block>
+      </dotItem>
+      <textItem title="文本">
+        <block slot="inner">
+          <view class="items">
+            <repeat for="{{texts}}" key="index">
+              <view class="item">
+                <textBadge :text="item" type="text" />
+                <text>ICON</text>
+              </view>
+            </repeat>
+          </view>
+        </block>
+      </textItem>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import badge from 'components/Badge';
+export default class Badges extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    numberItem: item,
+    dotItem: item,
+    textItem: item,
+    numberBadge: badge,
+    dotBadge: badge,
+    textBadge: badge
+  };
+  data = {
+    numbers: ['2', '36', '99+'],
+    texts: ['推荐', 'HOT', '有奖']
+  };
+}
+</script>

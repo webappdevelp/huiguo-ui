@@ -1,0 +1,260 @@
+<style lang="less">
+.body {
+  padding: 24rpx 28rpx 0;
+}
+.color {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 84rpx 72rpx 0;
+  width: 150rpx;
+  &:nth-child(3n) {
+    margin-right: 0;
+  }
+  &__box {
+    margin-bottom: 40rpx;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 12rpx 0;
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 4rpx;
+    box-sizing: border-box;
+    overflow: hidden;
+    color: #fff;
+    font-size: 22rpx;
+    &.cEBCD8D,
+    &.cF5E0B0,
+    &.c666461 {
+      justify-content: space-between;
+    }
+    &.cEBCD8D {
+      background-image: linear-gradient(-180deg, #EBCD8D 0%, #CCA44E 100%);
+    }
+    &.cF5E0B0 {
+      background-image: linear-gradient(-180deg, #F5E0B0 0%, #DBBA72 100%);
+    }
+    &.c666461 {
+      background-image: linear-gradient(-180deg, #666461 0%, #383734 100%);
+    }
+    &.cFFF0F0 {
+      color: #D64040;
+    }
+    &.cFFF9F0 {
+      color: #CCA553;
+    }
+  }
+  &__text {
+    font-size: 24rpx;
+    color: #666;
+    white-space: nowrap;
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Color 颜色" />
+    <view class="body">
+      <repeat for="{{lists}}" key="index">
+        <item :title="item['name']">
+          <block slot="inner">
+            <block wx:for="{{item['colors']}}" wx:for-index="idx" wx:for-item="color" wx:key="{{idx}}">
+              <view class="color">
+                <view class="color__box c{{color['color']}}" style="background-color: #{{color['color']}}; box-shadow: {{color['boxShadow']}}; color: {{color['textColor']}}">
+                  <text>#{{color['color']}}</text>
+                  <block wx:if="{{color['type']}}">
+                    <text>#{{color['rgba']}}</text>
+                  </block>
+                  <block wx:else>
+                    <text>{{color['rgba']}}</text>
+                  </block>
+                </view>
+                <text class="color__text">{{color['text']}}</text>
+              </view>
+            </block>
+          </block>
+        </item>
+        <!-- <view class="item">
+          <itemTitle :text="item['name']" />
+          <view class="item__title">{{item['name']}}</view>
+          <view class="item__inner">
+            <block wx:for="{{item['colors']}}" wx:for-index="idx" wx:for-item="color" wx:key="{{idx}}">
+              <view class="color">
+                <view class="color__box c{{color['color']}}" style="background-color: #{{color['color']}}; box-shadow: {{color['boxShadow']}}; color: {{color['textColor']}}">
+                  <text>#{{color['color']}}</text>
+                  <block wx:if="{{color['type']}}">
+                    <text>#{{color['rgba']}}</text>
+                  </block>
+                  <block wx:else>
+                    <text>{{color['rgba']}}</text>
+                  </block>
+                </view>
+                <text class="color__text">{{color['text']}}</text>
+              </view>
+            </block>
+          </view>
+        </view> -->
+      </repeat>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+export default class Colors extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    item
+  };
+
+  mixins = [];
+
+  data = {
+    lists: [
+      {
+        name: '主色',
+        colors: [
+          {
+            text: '图标组件色',
+            color: 'E0BE75',
+            rgba: '224 190 117',
+            boxShadow: '0 16rpx 30rpx 0 rgba(248,216,147,0.33)'
+          },
+          {
+            text: '文案色',
+            color: 'CCA553',
+            rgba: '204 165 83',
+            boxShadow: '0 16rpx 30rpx 0 rgba(242,213,152,0.33)'
+          }
+        ]
+      }, {
+        name: '文案规范用色',
+        colors: [
+          {
+            text: '强调色',
+            color: 'CCA553',
+            rgba: '204 165 83',
+            boxShadow: '0 16rpx 30rpx 0 rgba(242,213,152,0.33)'
+          }, {
+            text: '一级文字信息',
+            color: '333333',
+            rgba: '0 0 20',
+            boxShadow: '0 16rpx 30rpx 0 rgba(129,129,129,0.41)'
+          }, {
+            text: '次级文字信息',
+            color: '666666',
+            rgba: '0 0 40',
+            boxShadow: '0 16rpx 30rpx 0 rgba(161,161,161,0.41)'
+          }, {
+            text: '辅助文字信息',
+            color: '999999',
+            rgba: '0 0 60',
+            boxShadow: '0 16rpx 30rpx 0 rgba(188,188,188,0.41)'
+          }, {
+            text: '预设/辅助信息',
+            color: 'BBBBBB',
+            rgba: '0 0 73',
+            boxShadow: '0 16rpx 30rpx 0 rgba(183,183,183,0.29)'
+          }, {
+            text: '禁用状态用色',
+            color: 'DBDBDB',
+            rgba: '0 0 86',
+            boxShadow: '0 16rpx 30rpx 0 rgba(213,213,213,0.41)'
+          }, {
+            text: '分割线颜色',
+            color: 'EBEBEB',
+            rgba: '0 0 92',
+            boxShadow: '0 16rpx 30rpx 0 rgba(217,217,217,0.41)'
+          }
+        ]
+      }, {
+        name: '背景规范用色',
+        colors: [
+          {
+            text: '页面背景颜色',
+            color: 'F4F4F8',
+            rgba: '240 2 97',
+            boxShadow: '0 16rpx 30rpx 0 rgba(221,221,221,0.41)',
+            textColor: '#666'
+          }, {
+            text: '白色背景',
+            color: 'FFFFFF',
+            rgba: '0 0 100',
+            boxShadow: '0 16rpx 30rpx 0 rgba(234,234,234,0.41)',
+            textColor: '#666'
+          }
+        ]
+      }, {
+        name: '辅助渐变色',
+        colors: [
+          {
+            type: 'gradient',
+            text: '品牌渐变色',
+            color: 'EBCD8D',
+            rgba: 'CCA44E',
+            boxShadow: '0 16rpx 30rpx 0 rgba(241,209,141,0.41)'
+          }, {
+            type: 'gradient',
+            text: '品牌渐变色-浅',
+            color: 'F5E0B0',
+            rgba: 'DBBA72',
+            boxShadow: '0 16rpx 30rpx 0 rgba(229,196,124,0.41)'
+          }, {
+            type: 'gradient',
+            text: '品牌渐变色-深',
+            color: '666461',
+            rgba: '383734',
+            boxShadow: '0 16rpx 30rpx 0 rgba(129,129,129,0.41)'
+          }
+        ]
+      }, {
+        name: '辅助用色',
+        colors: [
+          {
+            text: '预告/通行色',
+            color: '49B85C',
+            rgba: '73 184 92',
+            boxShadow: '0 16rpx 30rpx 0 rgba(144,245,162,0.33)'
+          }, {
+            text: '链接色',
+            color: '61AAF2',
+            rgba: '97 170 242',
+            boxShadow: '0 16rpx 30rpx 0 rgba(160,201,243,0.45)'
+          }, {
+            text: '错误/警示色',
+            color: 'D64040',
+            rgba: '214 64 64',
+            boxShadow: '0 16rpx 30rpx 0 rgba(245,170,170,0.40)'
+          }, {
+            text: '提醒公告底色',
+            color: 'FFF0F0',
+            rgba: '255 240 240',
+            boxShadow: '0 16rpx 30rpx 0 rgba(255,240,240,0.83)'
+          }, {
+            text: '次级提醒公告底色',
+            color: 'FFF9F0',
+            rgba: '255 249 240',
+            boxShadow: '0 16rpx 30rpx 0 rgba(255,249,240,0.75)'
+          }
+        ]
+      }
+    ]
+  };
+
+  computed = {};
+
+  methods = {};
+
+  events = {};
+
+  onLoad() {}
+}
+</script>

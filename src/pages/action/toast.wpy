@@ -1,0 +1,82 @@
+<style lang="less">
+.btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0;
+  width: 100%;
+  .hg__btn {
+    margin-bottom: 40rpx;
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Toast 提示" />
+    <view class="body">
+      <item title="用法">
+        <block slot="inner">
+          <view class="btns">
+            <repeat for="{{btns}}" key="index">
+              <btn className="ghost" :text.sync="item['text']" :params.sync="item" @callback.user="handleClick" />
+            </repeat>
+          </view>
+        </block>
+      </item>
+    </view>
+    <toast :text.sync="toastText" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import btn from 'components/Btn';
+import toast from 'components/Toast';
+export default class Toast extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    item,
+    btn,
+    toast
+  };
+  data = {
+    toastText: '',
+    btns: [
+      {
+        type: 'min',
+        text: '显示 - 最小宽度'
+      },
+      { type: 'max', text: '显示 - 最大宽度' },
+      {
+        type: 'more',
+        text: '显示 - 超出换行'
+      }
+    ]
+  };
+  methods = {
+    handleClick(data) {
+      let { type } = data;
+      switch (type) {
+        case 'max':
+          this.toastText = '这里显示最大长度信息';
+          break;
+        case 'more':
+          this.toastText = '这里显示的是超过最大提示信息时，内容换行了';
+          break;
+        case 'min':
+          this.toastText = '最短';
+          break;
+        default:
+          this.toastText = '提示信息';
+          break;
+      }
+      this.$apply();
+    }
+  };
+}
+</script>

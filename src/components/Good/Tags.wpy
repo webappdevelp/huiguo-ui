@@ -1,0 +1,42 @@
+<style lang="less">
+.hg__goodtags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 11rpx 0;
+  min-height: 28rpx;
+  // white-space: nowrap;
+  overflow: hidden;
+  .hg__tag + .hg__tag {
+    margin-left: 8rpx;
+  }
+}
+</style>
+<template>
+  <view class="hg__goodtags {{className}}">
+    <repeat for="{{lists}}" key="index">
+      <tag :text.sync="item['text']" :className.sync="item['className']" />
+    </repeat>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import tag from 'components/Tag';
+export default class GoodTags extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    lists: {
+      type: Array,
+      default: []
+    }
+  };
+  components = {
+    tag
+  };
+}
+</script>

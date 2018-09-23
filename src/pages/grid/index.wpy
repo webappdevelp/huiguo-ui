@@ -1,0 +1,53 @@
+<style lang="less">
+</style>
+<template>
+  <view class="container">
+    <listHeader icon="/images/pages/grid.png" text="布局" />
+    <lists :lists="lists" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import listHeader from 'components/ListHeader';
+import lists from 'components/ListNavs';
+export default class BasePage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    listHeader,
+    lists
+  };
+
+  mixins = [];
+
+  data = {
+    lists: [
+      {
+        link: '/pages/grid/flex',
+        text: 'Flex 弹性布局'
+      },
+      {
+        link: '/pages/grid/list',
+        text: 'List 列表'
+      },
+      {
+        link: '/pages/grid/good',
+        text: 'Good 商品块布局'
+      },
+      {
+        link: '/pages/grid/coupon',
+        text: 'Coupon  优惠券'
+      }
+    ]
+  };
+
+  computed = {};
+
+  methods = {};
+
+  events = {};
+
+  onLoad() {}
+}
+</script>

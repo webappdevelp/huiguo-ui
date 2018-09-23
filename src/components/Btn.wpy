@@ -1,0 +1,159 @@
+<style lang="less">
+button::before,
+button::after {
+  display: none;
+}
+.hg__btn {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 32rpx;
+  height: 80rpx;
+  font-size: 0;
+  background: #E0BE75;
+  border-radius: 4rpx;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  &.column {
+    height: 116rpx;
+    flex-direction: column;
+  }
+  &.button-hover {
+    background: #C9AA69;
+  }
+  &__text,
+  &__desc {
+    line-height: 1;
+    white-space: nowrap;
+  }
+  &__text {
+    font-size: 32rpx;
+    color: #fff;
+  }
+  &__desc {
+    font-size: 24rpx;
+    color: #f5ebd5;
+  }
+  &.big {
+    height: 96rpx;
+    .hg__btn__text {
+      font-size: 36rpx;
+    }
+  }
+  &.big.column {
+    height: 116rpx;
+  }
+  &.small {
+    padding: 0 24rpx;
+    height: 48rpx;
+    min-width: 132rpx;
+    .hg__btn__text {
+      font-size: 24rpx;
+    }
+  }
+  &.disabled {
+    background: #F2E5C7;
+  }
+  &.ghost {
+    background: transparent;
+    border: 1rpx solid #E0BE75;
+    .hg__btn__text {
+      color: #CCA553;
+    }
+    .hg__btn__desc {
+      color: #dbc086;
+    }
+  }
+  &.ghost.disabled {
+    border-color: #F2E5C7;
+    .hg__btn__text,
+    .hg__btn__desc {
+      color: #CCA553;
+      opacity: .4;
+    }
+  }
+  &.second.ghost {
+    border-color: #999;
+    .hg__btn__text {
+      color: #333;
+    }
+  }
+  &.second.ghost.button-hover {
+    background: #DBDBDB;
+    border-color: #DBDBDB;
+    .hg__btn__text,
+    .hg__btn__desc {
+      color: #fff;
+    }
+  }
+  &.second.ghost.disabled {
+    background: transparent;
+    border-color: #DBDBDB;
+    .hg__btn__text {
+      opacity: .4;
+    }
+  }
+  &.second.ghost.disabled.button-hover {
+    background: transparent;
+    .hg__btn__text,
+    .hg__btn__desc {
+      color: #333;
+      opacity: .4;
+    }
+  }
+}
+</style>
+<template>
+  <button type="{{type}}" class="hg__btn {{className}} {{size}} {{desc && !!desc.length && 'column'}}" @tap="handleClick">
+    <text class="hg__btn__text">{{text}}</text>
+    <block wx:if="{{desc && !!desc.length}}">
+      <text class="hg__btn__desc">{{desc}}</text>
+    </block>
+  </button>
+</template>
+<script>
+import wepy from 'wepy';
+export default class Btn extends wepy.component {
+  props = {
+    type: {
+      type: String,
+      default: 'button'
+    },
+    className: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      default: ''
+    },
+    desc: {
+      type: String,
+      default: ''
+    },
+    size: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: ''
+    },
+    params: {
+      type: Object,
+      default: {}
+    },
+    callback: {
+      type: Function
+    }
+  };
+  methods = {
+    handleClick() {
+      this.$emit('callback', this.params);
+    }
+  }
+}
+</script>

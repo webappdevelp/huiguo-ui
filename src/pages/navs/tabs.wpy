@@ -1,0 +1,65 @@
+<style lang="less">
+.tabs {
+  width: 100%;
+  overflow: hidden;
+}
+.hg__tabnavs {
+  margin-bottom: 40rpx;
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Tabs 切换标签" />
+    <view class="body">
+      <baseItem title="样式一 <= 5">
+        <block slot="inner">
+          <view class="tabs">
+            <baseTwoTabs :lists="baseTwo" />
+            <baseFourthTabs :lists="baseFourth" />
+          </view>
+        </block>
+      </baseItem>
+      <moreItem title="样式二 > 5">
+        <block slot="inner">
+          <view class="tabs">
+            <moreTabs :lists="moreTabs" />
+          </view>
+        </block>
+      </moreItem>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import tabNavs from 'components/TabNavs';
+export default class Tabs extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    baseItem: item,
+    moreItem: item,
+    baseTwoTabs: tabNavs,
+    baseFourthTabs: tabNavs,
+    moreTabs: tabNavs
+  };
+  data = {
+    baseTwo: ['选项卡1', '选项卡2'],
+    baseFourth: ['选项卡1', '选项卡2', '选项卡3', '选项卡4', '选项卡5'],
+    moreTabs: [
+      '选项卡1',
+      '选项卡2',
+      '选项卡3',
+      '选项卡4',
+      '选项卡5',
+      '选项卡6',
+      '选项卡7',
+      '选项卡8',
+      '选项卡9'
+    ]
+  };
+}
+</script>

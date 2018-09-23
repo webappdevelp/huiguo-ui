@@ -1,0 +1,24 @@
+<style lang="less">
+.hg__salevolume {
+  font-size: 20rpx;
+  color: #999;
+}
+</style>
+<template>
+  <text class="hg__salevolume {{className}}">{{text}}</text>
+</template>
+<script>
+import wepy from 'wepy';
+export default class SaleVolume extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      default: ''
+    }
+  };
+}
+</script>

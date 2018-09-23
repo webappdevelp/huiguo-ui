@@ -1,0 +1,108 @@
+<style lang="less">
+.hg__notice {
+  height: 64rpx;
+  &__inner {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 0;
+    padding: 8rpx 20rpx;
+    background: #fffaf0;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow: hidden;
+    &[data-align='center'] {
+      justify-content: center;
+      .hg__notice__text {
+        text-align: center;
+      }
+    }
+    &[data-type='err'] {
+      background: #fff0f0;
+      .hg__notice__text {
+        color: #d64040;
+      }
+    }
+  }
+  &__icon {
+    margin-right: 20rpx;
+    .hg__icon__pic {
+      width: 32rpx;
+      height: 32rpx;
+    }
+  }
+  &__text {
+    flex: 1;
+    font-size: 24rpx;
+    color: #cca553;
+    white-space: nowrap;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+</style>
+<template>
+  <view class="hg__notice {{className}}">
+    <view class="hg__notice__inner" data-type="{{type}}" data-align="{{justifyContent}}">
+      <noticeIcon className="hg__notice__icon" :icon="noticeIcon" />
+      <view class="hg__notice__text" @tap="callback">{{text}}</view>
+      <closeBtn className="hg__notice__close" :icon="closeIcon" @callback.user="close" />
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import icon from 'components/Icon';
+export default class Notice extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      twoWay: true,
+      default: ''
+    },
+    type: {
+      type: String,
+      default: ''
+    },
+    justifyContent: {
+      type: String,
+      default: ''
+    },
+    noticeIcon: {
+      type: String,
+      default: '/images/common/notice.png'
+    },
+    closeIcon: {
+      type: String,
+      default: '/images/common/close.png'
+    },
+    callback: {
+      type: Function
+    }
+  };
+  components = {
+    noticeIcon: icon,
+    closeBtn: icon
+  };
+  methods = {
+    close() {
+      this.text = '';
+      this.$apply();
+    },
+    callback() {
+      this.$emit('callback');
+    }
+  };
+}
+</script>

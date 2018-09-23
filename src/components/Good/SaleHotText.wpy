@@ -1,0 +1,22 @@
+<style lang="less" scoped>
+.hg__good__saletext {
+  font-size: 20rpx;
+  color: #999;
+}
+</style>
+<template>
+  <view class="hg__good__saletext {{className}}">
+    {{text}}
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class SaleHotText extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    }
+  };
+}
+</script>

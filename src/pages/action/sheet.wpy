@@ -1,0 +1,100 @@
+<style lang="less">
+.btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0;
+  width: 100%;
+  .hg__btn {
+    margin-bottom: 40rpx;
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="ActionSheet 动作面板" />
+    <view class="body">
+      <item title="用法">
+        <block slot="inner">
+          <view class="btns">
+            <repeat for="{{btns}}" key="index">
+              <btn className="ghost" :text="item['text']" :params="item" @callback.user="handleClick" />
+            </repeat>
+          </view>
+        </block>
+      </item>
+    </view>
+    <sheet :show.sync="showSheet" :title.sync="sheetTitle" :btns.sync="sheetBtns" @callback.user="sheetCallback" />
+    <toast :text.sync="toastText" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import sheet from 'components/ActionSheet';
+import btn from 'components/Btn';
+import toast from 'components/Toast';
+export default class Sheet extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    item,
+    sheet,
+    btn,
+    toast
+  };
+  data = {
+    toastText: '',
+    showSheet: false,
+    sheetTitle: '操作面板',
+    sheetBtns: [],
+    btns: [
+      { type: 'title', text: '打开 - 基本用法' },
+      {
+        type: 'noTitle',
+        text: '打开 - 无标题'
+      },
+      { type: 'more', text: '打开 - 多按钮' }
+    ]
+  };
+  methods = {
+    handleClick(data) {
+      let { type } = data;
+      this.sheetBtns = [
+        {
+          type: 'c1',
+          text: '操作一'
+        },
+        {
+          type: 'c2',
+          text: '操作二'
+        }
+      ];
+      switch (type) {
+        case 'noTitle':
+          this.sheetTitle = '';
+          break;
+        case 'more':
+          this.sheetBtns = this.sheetBtns.concat({
+            type: 'c3',
+            text: '操作三'
+          });
+          break;
+        default:
+          break;
+      }
+      this.showSheet = true;
+      this.$apply();
+    },
+    sheetCallback(data) {
+      let { text } = data;
+      this.toastText = `您点击了${text}`;
+      this.$apply();
+    }
+  };
+}
+</script>

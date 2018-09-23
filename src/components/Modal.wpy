@@ -1,0 +1,145 @@
+<style lang="less">
+.hg__modal {
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s ease;
+  &[data-active='true'] {
+    visibility: visible;
+    opacity: 1;
+  }
+  &__bg,
+  &__box {
+    position: fixed;
+    z-index: 50;
+  }
+  &__bg {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .45);
+  }
+  &__box {
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: 0 80rpx;
+    background: #fff;
+    border-radius: 8rpx;
+    overflow: hidden;
+    transform: translate3d(0, -50%, 0);
+  }
+  &__header {
+    padding: 48rpx 0 24rpx;
+    line-height: 50rpx;
+    font-size: 36rpx;
+    color: #333;
+    text-align: center;
+  }
+  &__body {
+    padding: 48rpx;
+    line-height: 44rpx;
+    font-size: 32rpx;
+    color: #333;
+  }
+  &__header + &__body {
+    padding: 0 48rpx 40rpx;
+  }
+  &__btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 0;
+    border-top: 1rpx solid #ebebeb;
+  }
+  &__btn {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 96rpx;
+    background: #fff;
+    text-align: center;
+    .hg__btn__text {
+      font-size: 32rpx;
+      color: #333;
+    }
+    &.button-hover {
+      background: #f5f5f5;
+    }
+  }
+  &__singlebtn {
+    .hg__btn__text {
+      color: #CCA553;
+    }
+  }
+  &__btn + &__btn {
+    border-left: 1rpx solid #ebebeb;
+    .hg__btn__text {
+      color: #CCA553;
+    }
+  }
+}
+</style>
+<template>
+  <view class="hg__modal" data-active="{{show}}">
+    <view class="hg__modal__bg" />
+    <view class="hg__modal__box">
+      <view class="hg__modal__header" wx:if="{{!!title}}">
+        {{title}}
+      </view>
+      <view class="hg__modal__body">
+        <slot name="body" />
+      </view>
+      <view class="hg__modal__btns" wx:if="{{!!btns.length}}">
+        <repeat for="{{btns}}" key="index">
+          <btn className="hg__modal__btn second {{btns.length === 1 ? 'hg__modal__singlebtn' : ''}}" :text="item['text']" :params="item" @callback.user="handleClick" />
+        </repeat>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import btn from 'components/Btn';
+export default class Modal extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    show: {
+      type: Boolean,
+      twoWay: true,
+      default: false
+    },
+    title: {
+      type: String,
+      default: ' 温馨提示'
+    },
+    btns: {
+      type: Array,
+      default: []
+    },
+    showCloseBtn: {
+      type: Boolean,
+      default: false
+    },
+    callback: {
+      type: Function
+    }
+  };
+  components = {
+    btn
+  };
+  methods = {
+    handleClick(params) {
+      this.show = false;
+      this.$apply();
+      this.$emit('callback', params);
+    }
+  }
+}
+</script>

@@ -1,0 +1,138 @@
+<style lang="less">
+.container {
+  background: #f8f8f8;
+}
+.header {
+  padding: 100rpx 0 82rpx;
+}
+.logo {
+  display: block;
+  margin: 0 auto;
+  width: 228rpx;
+  height: 216rpx;
+}
+.item {
+  margin: 0 36rpx 40rpx;
+  padding: 0 32rpx 0 36rpx;
+  height: 144rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background: #fff;
+  box-shadow: 0 4rpx 20rpx 0 rgba(153, 153, 153, 0.08);
+  &__head {
+    height: 68rpx;
+    width: 68rpx;
+  }
+  &__inner {
+    margin-left: 28rpx;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 0;
+  }
+  &__title {
+    font-size: 32rpx;
+    color: #333;
+  }
+  &__desc {
+    font-size: 24rpx;
+    color: #999;
+  }
+}
+.arrow {
+  width: 56rpx;
+  height: 56rpx;
+  box-shadow: 2rpx 6rpx 6rpx 0 rgba(230, 201, 133, 0.3);
+  border-radius: 50%;
+  overflow: hidden;
+}
+.copy {
+  padding: 46rpx 0 40rpx;
+  font-size: 22rpx;
+  color: #999;
+  text-align: center;
+}
+</style>
+<template>
+  <view class="container">
+    <view class="header">
+      <image class="logo" src="/images/index/logo.png" />
+    </view>
+    <block wx:for="{{lists}}" wx:key="{{index}}">
+      <navigator class="item" url="{{item['link']}}" hover-class="none">
+        <image class="item__head" src="{{item['head']}}" />
+        <view class="item__inner">
+          <text class="item__title">{{item['title']}}</text>
+          <text class="item__desc">{{item['desc']}}</text>
+        </view>
+        <image class="arrow" src="/images/index/arrow.png" />
+      </navigator>
+    </block>
+    <view class="copy">Copyright @  2017-2018 会过UED</view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {};
+
+  mixins = [];
+
+  data = {
+    lists: [
+      {
+        link: '/pages/base/index',
+        head: '/images/index/base.png',
+        title: '基础',
+        desc: '包含颜色、文本、图标等'
+      },
+      {
+        link: '/pages/views/index',
+        head: '/images/index/view.png',
+        title: '视图',
+        desc: '包含头像、徽标、通告栏等'
+      },
+      {
+        link: '/pages/navs/index',
+        head: '/images/index/navs.png',
+        title: '导航',
+        desc: '包含导航栏、标签页、固定Tab等'
+      },
+      {
+        link: '/pages/form/index',
+        head: '/images/index/form.png',
+        title: '表单',
+        desc: '包含输入框、单选框、复选框、开关等'
+      },
+      {
+        link: '/pages/grid/index',
+        head: '/images/index/grids.png',
+        title: '布局',
+        desc: '包含Flex弹性布局、商品流、优惠券等'
+      },
+      {
+        link: '/pages/action/index',
+        head: '/images/index/action.png',
+        title: '操作反馈',
+        desc: '包含动作面板、模态框、进度条等'
+      }
+    ]
+  };
+
+  computed = {};
+
+  methods = {};
+
+  events = {};
+
+  onLoad() {}
+}
+</script>

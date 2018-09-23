@@ -1,0 +1,146 @@
+<style lang="less">
+.hg__onespans {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.hg__onespan {
+  flex: 1;
+  position: relative;
+  padding: 24rpx;
+  width: 100%;
+  font-size: 0;
+  background: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  & + & {
+    border-top: 1rpx solid #ebebeb;
+  }
+  &__inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+  &__info {
+    margin-left: 24rpx;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0;
+    width: 100%;
+  }
+}
+.hg__price {
+  font-size: 28rpx!important;
+}
+.hg__goodbtn {
+  position: absolute;
+  right: 24rpx;
+  bottom: 24rpx;
+  width: auto;
+}
+</style>
+<template>
+<view class="hg__onespans {{parentClassName}}">
+  <repeat for="{{goods}}" key="{{index}}">
+    <view class="hg__onespan {{className}}">
+      <navigator class="hg__onespan__inner" url="" hover-class="none">
+        <pic :url.sync="item['pic']" :width.sync="width" :height.sync="height" :overText.sync="item['over']" />
+        <view class="hg__onespan__info" style="height: {{height}}rpx">
+          <view class="hg__onespan__info-top">
+            <title :text.sync="item['title']" :icon.sync="item['country']" />
+            <!-- tags start -->
+            <tags :lists.sync="item['tags']" />
+          </view>
+          <!-- tags end -->
+          <view class="hg__onespan__footer">
+            <prices :saleText.sync="item['sale_price']" :profit.sync="item['profit']" saleClassName="hg__price" profitClassName="hg__price" />
+            <block wx:if="{{!item['needBtn'] && !!item['sale_text']}}">
+              <saleVolume :text.sync="item['sale_text']" />
+            </block>
+          </view>
+        </view>
+      </navigator>
+      <block wx:if="{{item['needBtn']}}">
+        <block wx:if="{{!!item['btnIcon']}}">
+          <iconBtn :className.sync="item['btnClassName']" :icon.sync="item['btnIcon']" :text.sync="item['btnText']" :params.sync="item" @callback.user="handleClick" />
+        </block>
+        <block wx:else>
+          <btn :className.sync="item['btnClassName']" :text.sync="item['btnText']" :size.sync="item['btnSize']" :params.sync="item" @callback.user="handleClick" />
+        </block>
+      </block>
+    </view>
+  </repeat>
+</view>
+</template>
+<script>
+import wepy from 'wepy';
+import pic from './Pic';
+import title from './Title';
+import tags from './Tags';
+import prices from './Prices';
+import saleVolume from './SaleVolume';
+import iconBtn from 'components/Icon';
+import btn from 'components/Btn';
+export default class OneSpan extends wepy.component {
+  props = {
+    parentClassName: {
+      type: String,
+      default: ''
+    },
+    className: {
+      type: String,
+      default: ''
+    },
+    goods: {
+      type: Array,
+      default: []
+    },
+    width: {
+      type: Number,
+      default: 256
+    },
+    height: {
+      type: Number,
+      default: 256
+    },
+    callback: {
+      type: Function
+    }
+  };
+  components = {
+    pic,
+    title,
+    tags,
+    prices,
+    saleVolume,
+    iconBtn,
+    btn
+  };
+  methods = {
+    handleClick(params) {
+      this.$emit('callback', params);
+    }
+  };
+}
+</script>

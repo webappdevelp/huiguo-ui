@@ -1,0 +1,78 @@
+<style lang="less">
+.hg__textarea {
+  position: relative;
+  padding: 20rpx 20rpx 52rpx;
+  border: 1rpx solid #dbdbdb;
+  &__nocounts {
+    padding-bottom: 20rpx;
+  }
+  textarea {
+    width: 100%;
+    font-size: 30rpx;
+    color: #333;
+  }
+  &__counts {
+    position: absolute;
+    right: 20rpx;
+    bottom: 20rpx;
+    font-size: 24rpx;
+    color: #9b9b9b;
+  }
+}
+</style>
+<template>
+  <view class="hg__textarea {{!showCounts ? 'hg__textarea__nocounts' : ''}} {{className}}">
+    <textarea value="{{value}}"  disabled="{{disabled}}" placeholder="{{placeholder}}" placeholder-class="{{placeholderClassName}}" auto-height="{{autoHeight}}" maxlength="{{maxLength}}" @input="changeInput" style="min-height: {{minHeight}}rpx; height: {{minHeight}}rpx;" />
+    <view wx:if="{{showCounts && maxLength !== -1}}" class="hg__textarea__counts">{{value.length}}/{{maxLength}}</view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class TextArea extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    value: {
+      type: String,
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      default: '请描述您所遇到的问题'
+    },
+    placeholderClassName: {
+      type: String,
+      default: 'placeholder'
+    },
+    autoHeight: {
+      type: Boolean,
+      default: false
+    },
+    minHeight: {
+      type: Number,
+      default: 120
+    },
+    maxLength: {
+      type: Number,
+      default: -1
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    showCounts: {
+      type: Boolean,
+      default: false
+    }
+  };
+  methods = {
+    changeInput(event) {
+      let { value } = event.detail;
+      this.value = value;
+      this.$apply();
+    }
+  }
+}
+</script>

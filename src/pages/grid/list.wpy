@@ -1,0 +1,121 @@
+<style lang="less">
+.hg__lists {
+  width: 100%;
+}
+.arrow {
+  & > text {
+    font-size: 26rpx;
+    color: #bbb;
+  }
+  & > image {
+    width: 14rpx;
+    height: 20rpx;
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="List 列表" />
+    <view class="body">
+      <baseItem title="基本用法">
+        <block slot="inner">
+          <baseLists :lists="baseData" />
+        </block>
+      </baseItem>
+      <descItem title="包含描述信息">
+        <block slot="inner">
+          <descLists :lists="descData" />
+        </block>
+      </descItem>
+      <richItem title="图文信息">
+        <block slot="inner">
+          <richLists :lists="rishData" />
+        </block>
+      </richItem>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import lists from 'components/List/Index';
+import richLists from 'components/List/Rich';
+export default class List extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    baseItem: item,
+    descItem: item,
+    richItem: item,
+    baseLists: lists,
+    descLists: lists,
+    richLists
+  };
+  data = {
+    baseData: [
+      {
+        title: '标题信息'
+      },
+      {
+        title: '标题信息'
+      },
+      {
+        title: '标题信息',
+        second: '详细信息',
+        iconClassName: 'arrow',
+        icon: '/images/pages/arrow.png',
+        iconDirection: 'right'
+      },
+      {
+        title: '标题信息',
+        second: '详细信息',
+        iconClassName: 'arrow',
+        icon: '/images/pages/arrow.png',
+        iconDirection: 'right'
+      }
+    ],
+    descData: [
+      {
+        title: '标题信息',
+        desc: '描述信息'
+      },
+      {
+        title: '标题信息',
+        desc: '描述信息'
+      },
+      {
+        title: '标题信息',
+        desc: '描述信息',
+        second: '详细信息',
+        iconClassName: 'arrow',
+        icon: '/images/pages/arrow.png',
+        iconDirection: 'right'
+      },
+      {
+        title: '标题信息',
+        desc: '描述信息',
+        second: '详细信息',
+        iconClassName: 'arrow',
+        icon: '/images/pages/arrow.png',
+        iconDirection: 'right'
+      }
+    ],
+    rishData: [
+      {
+        title: '【重大通知】会过官方社群福利发放',
+        desc: '会过官方社群福利发放！入门必入群，超多福利等着你！会过官方社群福利发放！入门必入群，超多福利等着你！',
+        pic: 'https://goods6.huiguo.net/goods/180408/b/0/5ac9ddf78150a11609563ce0_345x216.jpg?imageMogr2/quality/88!/format/jpg'
+      },
+      {
+        title: '【重大通知】会过官方社群福利发放',
+        desc: '会过官方社群福利发放！入门必入群，超多福利等着你！会过官方社群福利发放！入门必入群，超多福利等着你！',
+        picDirection: 'right',
+        pic: 'https://goods6.huiguo.net/goods/180408/b/0/5ac9ddf78150a11609563ce0_345x216.jpg?imageMogr2/quality/88!/format/jpg'
+      }
+    ]
+  };
+}
+</script>

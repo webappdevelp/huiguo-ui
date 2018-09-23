@@ -1,0 +1,107 @@
+<style lang="less">
+.bars {
+  width: 100%;
+  .hg__progress {
+    margin-bottom: 40rpx;
+  }
+}
+.big {
+  height: 20rpx;
+}
+.small {
+  height: 6rpx;
+}
+.percent {
+  flex: 1;
+  margin-right: 20rpx;
+  &__bar {
+    background: #d64040;
+  }
+  &__text {
+    font-size: 24rpx;
+    color: #333;
+  }
+}
+.percent__box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0;
+  width: 100%;
+}
+.hg__btn {
+  margin-top: 60rpx;
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Progress 进度条" />
+    <view class="body">
+      <baseItem title="基本用法">
+        <block slot="inner">
+          <view class="bars">
+            <repeat for="{{values}}" key="index">
+              <normalBar :value.sync="item['value']" :className="item['className']" :barClassName="item['barClassName']" />
+            </repeat>
+          </view>
+        </block>
+      </baseItem>
+      <percent title="显示百分比">
+        <block slot="inner">
+          <view class="percent__box">
+            <percentBar :value.sync="percent" className="percent" barClassName="percent__bar" />
+            <text class="percent__text">{{percent}}%</text>
+          </view>
+        </block>
+      </percent>
+      <btn text="切换进度" className="ghost" @callback.user="handleClick" />
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import progress from 'components/Progress';
+import btn from 'components/Btn';
+export default class Progress extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    baseItem: item,
+    percent: item,
+    normalBar: progress,
+    percentBar: progress,
+    btn
+  };
+  data = {
+    values: [
+      {
+        value: 20,
+        className: 'small',
+        barClassName: 'small'
+      },
+      {
+        value: 40
+      },
+      {
+        value: 60,
+        className: 'big',
+        barClassName: 'big'
+      }
+    ],
+    percent: 40
+  };
+  methods = {
+    handleClick() {
+      let { percent } = this;
+      percent += 5;
+      this.percent = percent > 100 ? 100 : percent;
+      this.$apply();
+    }
+  };
+}
+</script>

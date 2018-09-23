@@ -1,0 +1,73 @@
+<style lang="less">
+.hg__navbar {
+  height: 88rpx;
+  &__inner {
+    position: relative;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 88rpx;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #ebebeb;
+  }
+  &-text {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 36rpx;
+    color: #333;
+  }
+  &-left {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 88rpx;
+    height: 88rpx;
+  }
+  &-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 32rpx;
+    color: #666;
+  }
+}
+</style>
+<template>
+  <view class="hg__navbar {{className}}">
+    <view class="hg__navbar__inner {{innerClassName}}">
+      <image class="hg__navbar-left" src="/images/common/arrow-back.png" />
+      <view class="hg__navbar-text">{{text}}</view>
+      <slot name="right" />
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class Navbar extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    innerClassName: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      default: '导航栏'
+    }
+  };
+}
+</script>

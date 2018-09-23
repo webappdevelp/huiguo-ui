@@ -1,0 +1,59 @@
+<style lang="less">
+.navbar {
+  width: 100%;
+}
+.action__btn {
+  padding-right: 24rpx;
+}
+.share__btn {
+  width: 88rpx;
+  height: 88rpx;
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="NavBar 顶部导航" />
+    <view class="body">
+      <backItem title="返回按钮">
+        <block slot="inner">
+          <backNavbar className="navbar" />
+        </block>
+      </backItem>
+      <rightItem title="右侧文字按钮">
+        <block slot="inner">
+          <rightNavbar className="navbar">
+            <navigator class="hg__navbar-right action__btn" hover-class="none" slot="right">规则</navigator>
+          </rightNavbar>
+        </block>
+      </rightItem>
+      <shareItem title="右侧分享按钮">
+        <block slot="inner">
+          <shareNavbar className="navbar">
+            <image src="/images/common/share-nav.png" slot="right" class="hg__navbar-right share__btn" />
+          </shareNavbar>
+        </block>
+      </shareItem>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import navbar from 'components/Navbar';
+export default class NavBar extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    backItem: item,
+    rightItem: item,
+    shareItem: item,
+    backNavbar: navbar,
+    rightNavbar: navbar,
+    shareNavbar: navbar
+  };
+  data = {};
+}
+</script>

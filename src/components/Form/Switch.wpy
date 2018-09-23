@@ -1,0 +1,67 @@
+<style lang="less">
+.hg__switch {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0;
+  padding: 32rpx 0;
+  box-sizing: border-box;
+  &.disabled {
+    .hg__switch__title {
+      color: #999;
+    }
+  }
+  &__text {
+    font-size: 30rpx;
+    color: #333;
+  }
+}
+</style>
+<template>
+  <view class="hg__switch {{disabled ? 'disabled' : ''}} {{className}}">
+    <view class="hg__switch__text">{{text}}</view>
+    <switch checked="{{checked}}" disabled="{{disabled}}" color="{{color}}" type="{{type}}" @change="change" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class SwitchItem extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      default: ''
+    },
+    checked: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    color: {
+      type: String,
+      default: ''
+    },
+    type: {
+      type: String,
+      default: ''
+    },
+    callback: {
+      type: Function
+    }
+  };
+  methods = {
+    change(event) {
+      let { value } = event.detail;
+      this.$emit('callback', value);
+    }
+  }
+}
+</script>

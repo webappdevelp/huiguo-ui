@@ -1,0 +1,78 @@
+<style lang="less">
+.hg__toast {
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  padding: 20rpx 36rpx;
+  border-radius: 8rpx;
+  font-size: 30rpx;
+  max-width: 408rpx;
+  line-height: 42rpx;
+  background: rgba(0, 0, 0, 0.75);
+  word-wrap: break-word;
+  color: #fff;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0);
+  transition: all 0.3s ease;
+  &[data-active='true'] {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+</style>
+<template>
+  <view class="hg__toast" data-active="{{show}}">{{text}}</view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class Toast extends wepy.component {
+  timer = null;
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      twoWay: true,
+      default: ''
+    },
+    duration: {
+      type: Number,
+      default: 3000
+    }
+  };
+  data = {
+    show: false
+  };
+  computed = {
+    show() {
+      if (!!this.text) {
+        return true;
+      }
+      return false;
+    },
+    text() {
+      if (!!this.text) {
+        this.hiden();
+        return this.text;
+      }
+      return this.text;
+    }
+  };
+  hiden() {
+    if (this.timer) {
+      return;
+    }
+    this.timer = setTimeout(() => {
+      clearTimeout(this.timer);
+      this.text = '';
+      this.timer = null;
+      this.$apply();
+    }, this.duration);
+  }
+}
+</script>

@@ -1,0 +1,123 @@
+<style lang="less">
+.btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0;
+  width: 100%;
+  .hg__btn {
+    margin-bottom: 40rpx;
+  }
+}
+.popup__item {
+  padding: 46rpx 28rpx 0;
+  &__title,
+  &__desc {
+    position: relative;
+    padding-left: 24rpx;
+  }
+  &__title {
+    font-size: 30rpx;
+    color: #333;
+  }
+  &__desc {
+    margin-top: 10rpx;
+    font-size: 24rpx;
+    line-height: 34rpx;
+    color: #bbb;
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Popup 弹出窗" />
+    <view class="body">
+      <item title="用法">
+        <block slot="inner">
+          <view class="btns">
+            <repeat for="{{btns}}" key="index">
+              <btn className="ghost" :text.sync="item['text']" :params.sync="item" @callback.user="handleClick" />
+            </repeat>
+          </view>
+        </block>
+      </item>
+    </view>
+    <popup :show.sync="showPopup" title="Popup 标题内容" :btnClassName.sync="popupBtnClassName" :btnText.sync="popupBtnText" @callback.user="popupCallBack">
+      <block slot="body">
+        <view class="popup__item">
+          <view class="popup__item__title">我是小标题</view>
+          <view class="popup__item__desc">我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容。</view>
+        </view>
+        <view class="popup__item">
+          <view class="popup__item__title">我是小标题</view>
+          <view class="popup__item__desc">我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容。</view>
+        </view>
+        <view class="popup__item">
+          <view class="popup__item__title">我是小标题</view>
+          <view class="popup__item__desc">我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容。</view>
+        </view>
+        <view class="popup__item">
+          <view class="popup__item__title">我是小标题</view>
+          <view class="popup__item__desc">我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容。</view>
+        </view>
+        <view class="popup__item">
+          <view class="popup__item__title">我是小标题</view>
+          <view class="popup__item__desc">我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容。</view>
+        </view>
+        <view class="popup__item">
+          <view class="popup__item__title">我是小标题</view>
+          <view class="popup__item__desc">我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容。</view>
+        </view>
+      </block>
+    </popup>
+    <toast :text.sync="toastText" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import popup from 'components/Popup';
+import btn from 'components/Btn';
+import toast from 'components/Toast';
+export default class PopPage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    item,
+    btn,
+    popup,
+    toast
+  };
+  data = {
+    showPopup: false,
+    popupBtnClassName: 'big',
+    popupBtnText: '',
+    toastText: '',
+    btns: [
+      { type: 'base', text: '打开 - 基础用法' },
+      { type: 'close', text: '打开 - 有底部按钮' }
+    ]
+  };
+  methods = {
+    handleClick(data) {
+      let { type } = data;
+      if (type === 'base') {
+        this.popupBtnText = '';
+      } else {
+        this.popupBtnText = '确定';
+      }
+      this.showPopup = true;
+      this.$apply();
+    },
+    popupCallBack() {
+      this.toastText = '您关闭了 Popup 弹出窗';
+      this.showPopup = false;
+      this.$apply();
+    }
+  };
+}
+</script>

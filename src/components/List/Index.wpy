@@ -1,0 +1,86 @@
+<style lang="less">
+.hg__lists {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 0;
+  padding: 0 28rpx;
+}
+.hg__list__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0;
+  height: 108rpx;
+  width: 100%;
+  box-sizing: border-box;
+  & + & {
+    border-top: 1rpx solid #ebebeb;
+  }
+  &__inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 0;
+  }
+  &__title {
+    font-size: 30rpx;
+    color: #333;
+  }
+  &__desc {
+    font-size: 20rpx;
+    color: #999;
+  }
+}
+</style>
+<template>
+  <view class="hg__lists {{className}}">
+    <repeat for="{{lists}}" key="index">
+      <block wx:if="{{item['type'] === 'link'}}">
+        <navigator url="{{item['link']}}" class="hg__list__item {{item['className']}}" hover-class="none">
+          <view class="hg__list__item__inner">
+            <view class="hg__list__item__title">{{item['title']}}</view>
+            <view class="hg__list__item__desc" wx:if="{{!!item['desc'].length}}">{{item['desc']}}</view>
+          </view>
+          <block wx:if="{{!!item['icon'].length}}">
+            <icon :className.sync="item['iconClassName']" :iconDirection.sync="item['iconDirection']" :icon.sync="item['icon']" :text.sync="item['second']" />
+          </block>
+        </navigator>
+      </block>
+      <block wx:else>
+        <view class="hg__list__item {{item['className']}}">
+          <view class="hg__list__item__inner">
+            <view class="hg__list__item__title">{{item['title']}}</view>
+            <view class="hg__list__item__desc" wx:if="{{!!item['desc'].length}}">{{item['desc']}}</view>
+          </view>
+          <block wx:if="{{!!item['icon'].length}}">
+            <icon :className.sync="item['iconClassName']" :iconDirection.sync="item['iconDirection']" :icon.sync="item['icon']" :text.sync="item['second']" />
+          </block>
+        </view>
+      </block>
+    </repeat>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import icon from 'components/Icon';
+export default class ListIndex extends wepy.component {
+  props = {
+    lists: {
+      type: Array,
+      default: []
+    },
+    type: {
+      type: String,
+      default: ''
+    }
+  };
+  components = {
+    icon
+  };
+}
+</script>

@@ -1,0 +1,125 @@
+<style lang="less">
+.hg__twospans {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 0;
+  flex-wrap: wrap;
+  width: 100%;
+  overflow: hidden;
+}
+.hg__twospan {
+  position: relative;
+  margin: 0 0 4rpx;
+  padding: 0 0 20rpx;
+  width: 373rpx;
+  height: 573rpx;
+  font-size: 0;
+  background: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  &:nth-child(2n) {
+    margin-right: 0;
+  }
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 0;
+  }
+  &__info {
+    margin: 18rpx 20rpx 0;
+    overflow: hidden;
+  }
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0;
+    width: 100%;
+  }
+}
+.hg__goodbtn {
+  position: absolute;
+  right: 24rpx;
+  bottom: 24rpx;
+  width: auto;
+}
+</style>
+<template>
+<view class="hg__twospans {{parentClassName}}">
+  <repeat for="{{goods}}" key="{{index}}">
+    <view class="hg__twospan {{className}}">
+      <navigator class="hg__twospan__inner" url="" hover-class="none">
+        <pic :url.sync="item['pic']" :overText.sync="item['over']" />
+        <view class="hg__twospan__info">
+          <title :text.sync="item['title']" :icon.sync="item['country']" />
+          <!-- tags start -->
+          <tags :lists.sync="item['tags']" />
+          <!-- tags end -->
+          <view class="hg__twospan__footer">
+            <prices :saleText.sync="item['sale_price']" :profit.sync="item['profit']" />
+            <block wx:if="{{!item['needBtn'] && !!item['sale_text']}}">
+              <saleVolume :text.sync="item['sale_text']" />
+            </block>
+          </view>
+        </view>
+      </navigator>
+      <block wx:if="{{item['needBtn']}}">
+        <block wx:if="{{!!item['btnIcon']}}">
+          <iconBtn :className.sync="item['btnClassName']" :icon.sync="item['btnIcon']" :text.sync="item['btnText']" :params.sync="item" @callback.user="handleClick" />
+        </block>
+        <block wx:else>
+          <btn :className.sync="item['btnClassName']" :text.sync="item['btnText']" :size.sync="item['btnSize']" :params.sync="item" @callback.user="handleClick" />
+        </block>
+      </block>
+    </view>
+  </repeat>
+</view>
+</template>
+<script>
+import wepy from 'wepy';
+import pic from './Pic';
+import title from './Title';
+import prices from './Prices';
+import tags from './Tags';
+import saleVolume from './SaleVolume';
+import iconBtn from 'components/Icon';
+import btn from 'components/Btn';
+export default class TwoSpan extends wepy.component {
+  props = {
+    parentClassName: {
+      type: String,
+      default: ''
+    },
+    className: {
+      type: String,
+      default: ''
+    },
+    goods: {
+      type: Object,
+      default: {}
+    },
+    callback: {
+      type: Function
+    }
+  };
+  components = {
+    pic,
+    title,
+    tags,
+    prices,
+    saleVolume,
+    iconBtn,
+    btn
+  };
+  methods = {
+    handleClick(params) {
+      this.$emit('callback', params);
+    }
+  };
+}
+</script>

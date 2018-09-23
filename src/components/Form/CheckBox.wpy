@@ -1,0 +1,123 @@
+<style lang="less">
+.hg__checkboxs {
+  flex: 1;
+  max-width: 100%;
+  overflow: hidden;
+}
+.hg__checkbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  padding-right: 60rpx;
+  font-size: 0;
+  min-height: 48rpx;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  &.disabled {
+    .hg__checkbox__title {
+      color: #999;
+    }
+  }
+  .hg__icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate3d(0, -50%, 0);
+  }
+  &__title,
+  &__desc {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+  }
+  &__title {
+    line-height: 42rpx;
+    font-size: 30rpx;
+    color: #333;
+  }
+  &__desc {
+    font-size: 20rpx;
+    color: #999;
+  }
+}
+</style>
+<template>
+  <view class="hg__checkboxs {{className}}">
+    <repeat for="{{params}}" key="index">
+      <view class="hg__checkbox {{item['disabled'] ? 'disabled' : ''}} {{checkBoxClassName}}" data-id="{{index}}" @tap="change">
+        <view class="hg__checkbox__title">{{item['value']}}</view>
+        <view class="hg__checkbox__desc">{{item['desc']}}</view>
+        <block wx:if="{{item['disabled']}}">
+          <checkedDisabledIcon :icon.sync="disabledIcon" :className.sync="iconClassName" />
+        </block>
+        <block wx:if="{{item['checked'] && !item['disabled']}}">
+          <checkedIcon :icon.sync="icon" :className.sync="iconClassName" />
+        </block>
+        <block wx:elif="{{!item['checked']}}">
+          <defaultIcon :icon.sync="defaultIcon" :className.sync="iconClassName" />
+        </block>
+      </view>
+    </repeat>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import icon from 'components/Icon';
+export default class CheckBox extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    checkBoxClassName: {
+      type: String,
+      default: ''
+    },
+    params: {
+      type: Array,
+      twoWay: true,
+      default: []
+    },
+    iconClassName: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: '/images/common/check_on.png'
+    },
+    defaultIcon: {
+      type: String,
+      default: '/images/common/check_off.png'
+    },
+    disabledIcon: {
+      type: String,
+      default: '/images/common/check_disabled.png'
+    }
+  };
+  components = {
+    defaultIcon: icon,
+    checkedIcon: icon,
+    checkedDisabledIcon: icon
+  };
+  methods = {
+    change(event) {
+      let { dataset } = event.currentTarget;
+      let { id } = dataset;
+      this.params = this.params.map((item, index) => {
+        if (!item['disabled'] && !item['checked'] && index === id) {
+          item['checked'] = true;
+        } else if (!item['disabled'] && item['checked'] && index === id) {
+          item['checked'] = false;
+        }
+        return item;
+      });
+      this.$apply();
+    }
+  };
+}
+</script>

@@ -1,0 +1,71 @@
+<style lang="less">
+.checkbox {
+  flex: 1;
+  padding-top: 32rpx;
+  padding-bottom: 32rpx;
+  border-bottom: 1rpx solid #ebebeb;
+}
+.checkbox__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0;
+  .hg__checkbox {
+    margin-right: 20rpx;
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="CheckBox 复选框" />
+    <view class="body">
+      <baseItem title="基本用法">
+        <block slot="inner">
+          <baseCheckBox className="checkbox__row" :params.sync="intri" />
+        </block>
+      </baseItem>
+      <defaultItem title="默认值 && 禁用">
+        <block slot="inner">
+          <colCheckBox checkBoxClassName="checkbox" :params.sync="country" />
+        </block>
+      </defaultItem>
+      <descItem title="带有描述信息">
+        <block slot="inner">
+          <descCheckBox checkBoxClassName="checkbox" :params.sync="desc" />
+        </block>
+      </descItem>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import checkBox from 'components/Form/CheckBox';
+export default class CheckBoxPage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    baseItem: item,
+    defaultItem: item,
+    descItem: item,
+    baseCheckBox: checkBox,
+    colCheckBox: checkBox,
+    descCheckBox: checkBox
+  };
+  data = {
+    intri: [{ value: '爬山' }, { value: '旅行' }, { value: '游泳' }],
+    country: [
+      { value: '中国', checked: true },
+      { value: '美国', checked: true, disabled: true }
+    ],
+    desc: [
+      { value: '标题一', desc: '描述信息' },
+      { value: '标题二', desc: '描述信息' }
+    ]
+  };
+}
+</script>

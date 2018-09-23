@@ -1,0 +1,54 @@
+<style lang="less">
+.list {
+  padding: 0 60rpx;
+  background: #fff;
+  box-shadow: 0 -20rpx 48rpx 0 rgba(153, 153, 153, 0.08);
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 62rpx 0;
+    font-size: 0;
+    border-bottom: 1rpx solid #ebebeb;
+    box-sizing: border-box;
+    text {
+      font-size: 28rpx;
+      color: #333;
+    }
+    image {
+      width: 12rpx;
+      height: 20rpx;
+    }
+  }
+}
+</style>
+<template>
+  <view class="list {{clasName}}">
+    <block wx:for="{{lists}}" wx:key="{{index}}">
+      <navigator class="list__item {{itemClassName}}" url="{{item['link']}}" hover-class="none" >
+        <text>{{item['text']}}</text>
+        <image class="icon" src="/images/pages/arrow.png" />
+      </navigator>
+    </block>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class ListNavs extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    itemClassName: {
+      type: String,
+      default: ''
+    },
+    lists: {
+      type: Array,
+      default: []
+    }
+  };
+}
+</script>

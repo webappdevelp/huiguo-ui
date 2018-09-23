@@ -1,0 +1,61 @@
+<style lang="less">
+</style>
+<template>
+  <view class="container">
+    <listHeader icon="/images/pages/form.png" text="表单" />
+    <lists :lists="lists" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import listHeader from 'components/ListHeader';
+import lists from 'components/ListNavs';
+export default class BasePage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    listHeader,
+    lists
+  };
+
+  mixins = [];
+
+  data = {
+    lists: [
+      {
+        link: '/pages/form/input',
+        text: 'Input 输入框'
+      },
+      {
+        link: '/pages/form/radio',
+        text: 'Radio 单选框'
+      },
+      {
+        link: '/pages/form/checkbox',
+        text: 'Checkbox 复选框'
+      },
+      {
+        link: '/pages/form/switch',
+        text: 'Switch 开关切换'
+      },
+      {
+        link: '/pages/form/picker',
+        text: 'Picker 选择弹窗'
+      },
+      {
+        link: '/pages/form/textarea',
+        text: 'Textarea 多行文本'
+      }
+    ]
+  };
+
+  computed = {};
+
+  methods = {};
+
+  events = {};
+
+  onLoad() {}
+}
+</script>

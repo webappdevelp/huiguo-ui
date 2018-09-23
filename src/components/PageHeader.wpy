@@ -1,0 +1,49 @@
+<style lang="less">
+.page__header {
+  background: #f4f4f8;
+  padding: 52rpx 28rpx;
+  font-size: 0;
+  &__text {
+    display: inline-block;
+    position: relative;
+    padding-left: 20rpx;
+    font-size: 40rpx;
+    font-weight: bold;
+    color: #333;
+    text {
+      position: relative;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 8rpx;
+      left: 0;
+      right: 26%;
+      height: 20rpx;
+      background: #f3cc7a;
+    }
+  }
+}
+</style>
+<template>
+  <view class="page__header">
+    <view class="page__header__text">
+      <text>{{text}}</text>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class PageHeader extends wepy.component {
+  props = {
+    text: {
+      type: String,
+      default: ''
+    },
+    className: {
+      type: String,
+      default: ''
+    }
+  };
+}
+</script>

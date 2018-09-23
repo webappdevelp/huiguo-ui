@@ -1,0 +1,71 @@
+<style lang="less">
+.textareas {
+  width: 100%;
+  overflow: hidden;
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="TextArea 多行文本框" />
+    <view class="body">
+      <baseItem title="基本用法">
+        <block slot="inner">
+          <view class="textareas">
+            <baseArea :showCounts="showCounts" :maxLength="maxLength" />
+          </view>
+        </block>
+      </baseItem>
+      <noCountItem title="不计数">
+        <block slot="inner">
+          <view class="textareas">
+            <noCountArea :showCounts="showNoCounts" :maxLength="maxLength" />
+          </view>
+        </block>
+      </noCountItem>
+      <autoItem title="自动增高">
+        <block slot="inner">
+          <view class="textareas">
+            <autoArea :showCounts="showNoCounts" :autoHeight="autoHeight" />
+          </view>
+        </block>
+      </autoItem>
+      <disabledItem title="禁用">
+        <block slot="inner">
+          <view class="textareas">
+            <disabledArea :value="defaultValue" :showCounts="showCounts" :disabled="disabled" />
+          </view>
+        </block>
+      </disabledItem>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import textArea from 'components/Form/TextArea';
+export default class TextAreaPage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    baseItem: item,
+    baseArea: textArea,
+    noCountItem: item,
+    noCountArea: textArea,
+    autoItem: item,
+    autoArea: textArea,
+    disabledItem: item,
+    disabledArea: textArea
+  }
+  data = {
+    maxLength: 200,
+    showCounts: true,
+    showNoCounts: false,
+    autoHeight: true,
+    disabled: true,
+    defaultValue: '您被禁言了，这里不能输入'
+  };
+}
+</script>

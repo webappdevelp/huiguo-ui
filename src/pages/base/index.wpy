@@ -1,0 +1,53 @@
+<style lang="less">
+</style>
+<template>
+  <view class="container">
+    <listHeader icon="/images/pages/base.png" text="基础" />
+    <lists :lists="lists" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import listHeader from 'components/ListHeader';
+import lists from 'components/ListNavs';
+export default class BasePage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    listHeader,
+    lists
+  };
+
+  mixins = [];
+
+  data = {
+    lists: [
+      {
+        link: '/pages/base/colors',
+        text: 'Color 颜色'
+      },
+      {
+        link: '/pages/base/icons',
+        text: 'Icon 图标'
+      },
+      {
+        link: '/pages/base/fontsize',
+        text: 'Font 字体'
+      },
+      {
+        link: '/pages/base/btns',
+        text: 'Button 按钮'
+      }
+    ]
+  };
+
+  computed = {};
+
+  methods = {};
+
+  events = {};
+
+  onLoad() {}
+}
+</script>

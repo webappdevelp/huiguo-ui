@@ -1,0 +1,188 @@
+<style lang="less">
+.container {
+  padding-bottom: 72rpx;
+}
+.hg__row {
+  width: 100%;
+}
+.col__a {
+  justify-content: center;
+  align-items: center;
+  background: #e0be75;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  height: 38rpx;
+  font-size: 24rpx;
+  & + & {
+    border-left: 1rpx solid #fff;
+  }
+}
+.wrap__col {
+  width: 25%;
+  justify-content: center;
+  align-items: center;
+  background: #e0be75;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  height: 38rpx;
+  font-size: 24rpx;
+}
+.start {
+  height: 72rpx;
+  background: #f7f7f8;
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Flex 弹性布局" />
+    <view class="body">
+      <baseItem title="基本布局">
+        <block slot="inner">
+          <baseRow>
+            <block slot="row">
+              <repeat for="{{baseData}}" key="index">
+                <baseCol :className="item['className']" span="1">
+                  <block slot="col">{{item['text']}}</block>
+                </baseCol>
+              </repeat>
+            </block>
+          </baseRow>
+        </block>
+      </baseItem>
+      <autoItem title="内容自动撑开">
+        <block slot="inner">
+          <autoRow>
+            <block slot="row">
+              <repeat for="{{autoData}}" key="index">
+                <autoCol :className="item['className']" :span="item['span']">
+                  <block slot="col">{{item['text']}}</block>
+                </autoCol>
+              </repeat>
+            </block>
+          </autoRow>
+        </block>
+      </autoItem>
+      <warpItem title="超出换行">
+        <block slot="inner">
+          <wrapRow wrap="wrap">
+            <block slot="row">
+              <repeat for="{{wrapData}}" key="index">
+                <wrapCol className="wrap__col">
+                  <block slot="col">{{item}}</block>
+                </wrapCol>
+              </repeat>
+            </block>
+          </wrapRow>
+        </block>
+      </warpItem>
+      
+      <StartItem title="横纵排列 - start">
+        <block slot="inner">
+          <startRow className="start" :noGutters="noGutters" justifyContent="flex-start" alignItems="flex-start">
+            <block slot="row">
+              <repeat for="{{baseData}}" key="index">
+                <startCol :className="item['className']" span="1">
+                  <block slot="col">{{item['text']}}</block>
+                </startCol>
+              </repeat>
+            </block>
+          </startRow>
+        </block>
+      </StartItem>
+      <CenterItem title="横纵排列 - center">
+        <block slot="inner">
+          <centerRow className="start" :noGutters="noGutters" justifyContent="center" alignItems="center">
+            <block slot="row">
+              <repeat for="{{baseData}}" key="index">
+                <centerCol :className="item['className']" span="1">
+                  <block slot="col">{{item['text']}}</block>
+                </centerCol>
+              </repeat>
+            </block>
+          </centerRow>
+        </block>
+      </CenterItem>
+      <EndItem title="横纵排列 - end">
+        <block slot="inner">
+          <endRow className="start" :noGutters="noGutters" justifyContent="flex-end" alignItems="flex-end">
+            <block slot="row">
+              <repeat for="{{baseData}}" key="index">
+                <endCol :className="item['className']" span="1">
+                  <block slot="col">{{item['text']}}</block>
+                </endCol>
+              </repeat>
+            </block>
+          </endRow>
+        </block>
+      </EndItem>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import row from 'components/Grid/Row';
+import col from 'components/Grid/Col';
+export default class Flex extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    baseItem: item,
+    autoItem: item,
+    warpItem: item,
+    StartItem: item,
+    CenterItem: item,
+    EndItem: item,
+    baseRow: row,
+    baseCol: col,
+    autoRow: row,
+    autoCol: col,
+    wrapRow: row,
+    wrapCol: col,
+    startRow: row,
+    startCol: col,
+    centerRow: row,
+    centerCol: col,
+    endRow: row,
+    endCol: col
+  };
+  data = {
+    baseData: [
+      {
+        className: 'col__a',
+        text: 'A'
+      },
+      {
+        className: 'col__a',
+        text: 'B'
+      },
+      {
+        className: 'col__a',
+        text: 'C'
+      },
+      {
+        className: 'col__a',
+        text: 'D'
+      }
+    ],
+    autoData: [
+      {
+        className: 'col__a',
+        text: '内容自动撑开'
+      },
+      {
+        className: 'col__a',
+        span: '1',
+        text: 'B'
+      }
+    ],
+    wrapData: ['A', 'B', 'C', 'D', 'E', 'F'],
+    noGutters: true
+  };
+}
+</script>

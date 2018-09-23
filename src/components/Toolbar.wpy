@@ -1,0 +1,63 @@
+<style lang="less">
+.hg__toolbar {
+  height: 96rpx;
+  &__inner {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 96rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border-top: 1rpx solid #ebebeb;
+  }
+  &__inner > view {
+    flex: 1;
+  }
+}
+</style>
+<template>
+  <view class="hg__toolbar {{className}}">
+    <view class="hg__toolbar__inner {{innerClassName}}">
+      <block wx:if="{{!!lists.length}}">
+        <repeat for="{{lists}}" key="index">
+          <icon :icon.sync="item['icon']" :activedIcon.sync="item['activedIcon']" :className.sync="item['className']" :activedClassName="item['activedClassName']" :actived.sync="item['actived']" :text.sync="item['text']" :activedText.sync="item['activedText']" :params.sync="item" @callback.user="callback" />
+        </repeat>
+      </block>
+      <block wx:else>
+        <slot name="inner" />
+      </block>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import icon from 'components/Icon';
+export default class Toolbar extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    innerClassName: {
+      type: String,
+      default: ''
+    },
+    lists: {
+      type: Array,
+      default: []
+    }
+  };
+  components = {
+    icon
+  };
+  methods = {
+    callback(data) {
+      this.$emit('callback', data);
+    }
+  };
+}
+</script>

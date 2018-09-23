@@ -1,0 +1,88 @@
+<style lang="less">
+.container {
+  background: #f4f4f8;
+}
+.coupons {
+  max-width: 100%;
+}
+.btn {
+  padding: 0 16rpx;
+  border-color: #D64040!important;
+  border-radius: 200rpx;
+  .hg__btn__text {
+    font-size: 22rpx;
+    color: #D64040!important;
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Coupon 优惠券" />
+    <view class="body">
+      <item title="优惠券">
+        <block slot="inner">
+          <view class="coupons">
+            <coupons :coupons.sync="coupons" btnClassName="btn" btnText="立即使用" @callback.user="handleClick" />
+          </view>
+        </block>
+      </item>
+    </view>
+    <toast :text.sync="toastText" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import coupons from 'components/Coupons';
+import toast from 'components/Toast';
+export default class Coupon extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    item,
+    coupons,
+    toast
+  };
+  data = {
+    toastText: '',
+    coupons: [{
+      id: 12,
+      name: '11良品铺子专享券良品铺子专享券良品铺子专享券',
+      value: '10',
+      condition: '满100元可用',
+      validity: '2018.01.01 10:00至2020.9.1 10:00',
+      limit: '指定单品可用',
+      status: '0',
+      desc: ['来源：文博（24小时未使用将退回）', '领取时间：2017.5.15 17:58', '使用范围：童装太子龙官方旗舰店专用，童装太子龙官方旗舰店专用童装太子龙官方旗舰店专用童装太子龙官方旗舰店专用童装太子龙官方旗舰店专用']
+    }, {
+      id: 13,
+      name: '22良品铺子专享券良品铺子专享券良品铺子专享券',
+      value: '10',
+      condition: '满100元可用',
+      validity: '2018.01.01 10:00至2020.9.1 10:00',
+      limit: '指定单品可用',
+      status: '1',
+      desc: ['来源：文博（24小时未使用将退回）', '领取时间：2017.5.15 17:58', '使用范围：童装太子龙官方旗舰店专用，童装太子龙官方旗舰店专用童装太子龙官方旗舰店专用童装太子龙官方旗舰店专用童装太子龙官方旗舰店专用']
+    }, {
+      id: 14,
+      name: '33良品铺子专享券良品铺子专享券良品铺子专享券',
+      value: '100',
+      condition: '满1000元可用',
+      validity: '2018.01.01 10:00至2020.9.1 10:00',
+      limit: '指定单品可用',
+      status: '2',
+      desc: ['来源：文博（24小时未使用将退回）', '领取时间：2017.5.15 17:58', '使用范围：童装太子龙官方旗舰店专用，童装太子龙官方旗舰店专用童装太子龙官方旗舰店专用童装太子龙官方旗舰店专用童装太子龙官方旗舰店专用']
+    }]
+  };
+  methods = {
+    handleClick(data) {
+      let { id } = data;
+      this.toastText = `您使用了ID为${id}的券`;
+      this.$apply();
+    }
+  };
+}
+</script>

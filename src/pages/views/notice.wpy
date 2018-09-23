@@ -1,0 +1,84 @@
+<style lang="less">
+.notices {
+  width: 100%;
+}
+.hg__notice + .hg__notice {
+  margin-top: 24rpx;
+}
+.hg__notice__inner {
+  position: relative;
+}
+.prompt {
+  background: #FFF0F0;
+  color: #D64040;
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="NoticeBar 通告栏" />
+    <view class="body">
+      <baseItem title="无图标居中">
+        <block slot="inner">
+          <view class="notices">
+            <baseNotice :justifyContent="justifyContent" :text="defalutText" noticeIcon="" closeIcon="" />
+            <errNotice :justifyContent="justifyContent" :text="defalutText" noticeIcon="" closeIcon="" type="err" />
+          </view>
+        </block>
+      </baseItem>
+      <iconItem title="带图标">
+        <block slot="inner">
+          <view class="notices">
+            <block wx:if="{{closeText.length}}">
+              <iconNotice :text="closeText" @callback.user="showNotice" />
+            </block>
+          </view>
+        </block>
+      </iconItem>
+    </view>
+    <modal title="消息通知" :show.sync="showModal" :btns="modalBtns" @callback.user="modalCallback">
+      <block slot="body">{{closeText}}</block>
+    </modal>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import notice from 'components/Notice';
+import modal from 'components/Modal';
+export default class Notices extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    baseItem: item,
+    baseNotice: notice,
+    errNotice: notice,
+    iconItem: item,
+    iconNotice: notice,
+    modal
+  };
+  data = {
+    justifyContent: 'center',
+    defalutText: '[普通级文案] 用户上滑页面时，置顶显示',
+    errText: '[重点级文案] 用户上滑页面时，置顶显示',
+    closeText: '点击关闭按钮后，消息不再显示',
+    showModal: false,
+    modalBtns: [{type: 'confirm', text: '知道了'}]
+  };
+  methods = {
+    showNotice() {
+      this.showModal = true;
+      this.$apply();
+    },
+    modalCallback(data) {
+      if (data.type === 'confirm') {
+        this.showModal = false;
+        this.closeText = '';
+        this.$apply();
+      }
+    }
+  };
+}
+</script>

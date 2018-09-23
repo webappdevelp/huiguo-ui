@@ -1,0 +1,30 @@
+<style lang="less">
+.hg__col {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 0;
+  box-sizing: border-box;
+}
+</style>
+<template>
+  <view class="hg__col {{className}}" style="flex: {{span}}; flex-direction: {{direction}}; ">
+    <slot name="col" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class Col extends wepy.component {
+  props = {
+    className: {
+      type: String,
+      default: ''
+    },
+    span: {
+      type: String,
+      default: ''
+    }
+  };
+}
+</script>

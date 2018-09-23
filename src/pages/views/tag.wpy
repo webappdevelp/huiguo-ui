@@ -1,0 +1,187 @@
+<style lang="less">
+.tips {
+  line-height: 34rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+.tags {
+  padding-top: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0;
+  width: 100%;
+}
+.tags + .tips {
+  margin-top: 30rpx;
+}
+.hg__tag + .hg__tag {
+  margin-left: 24rpx;
+}
+.yellow {
+  background: #F08335;
+  border-color: #F08335;
+}
+.global {
+  background: #6600EE;
+  border-color: #6600EE;
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Tag 标签" />
+    <view class="body">
+      <singleItem title="单字标签">
+        <block slot="inner">
+          <view class="tips">宽为14px，高13px，左右各2px，色值#D64040，圆角为1px</view>
+          <view class="tags">
+            <repeat for="{{singles}}" key="index">
+              <singleTag :className="item['className']" :text="item['text']" />
+            </repeat>
+          </view>
+        </block>
+      </singleItem>
+      <moreItem title="多字标签">
+        <block slot="inner">
+          <view class="tips">高13px，宽最小值为14px，字号10pt，色值#D64040，当超过则根据文字宽度适配，左右各3px，圆角为1px</view>
+          <view class="tags">
+            <repeat for="{{mores}}" key="index">
+              <moreTag :className="item['className']" :text="item['text']" />
+            </repeat>
+          </view>
+        </block>
+      </moreItem>
+      <radiusItem title="圆角标签">
+        <block slot="inner">
+          <view class="tips">高15px，宽最小值为34px，字号10pt，色值#D64040，当超过则根据文字宽度适配，左右各6px</view>
+          <view class="tags">
+            <repeat for="{{radius}}" key="index">
+              <radiusTag :radius="true" :className="item['className']" :text="item['text']" />
+            </repeat>
+          </view>
+        </block>
+      </radiusItem>
+      <scenesItem title="标签场景">
+        <block slot="inner">
+          <view class="tips">商品属性</view>
+          <view class="tags">
+            <repeat for="{{goodTags}}" key="index">
+              <goodTag :className="item['className']" :text="item['text']" />
+            </repeat>
+          </view>
+          <view class="tips">运营属性</view>
+          <view class="tags">
+            <repeat for="{{actTags}}" key="index">
+              <actTag :className="item['className']" :text="item['text']" />
+            </repeat>
+          </view>
+          <view class="tips">会员属性</view>
+          <view class="tags">
+            <repeat for="{{vipTags}}" key="index">
+              <vipTag :radius="true" :className="item['className']" :text="item['text']" />
+            </repeat>
+          </view>
+        </block>
+      </scenesItem>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import tag from 'components/Tag';
+export default class Tags extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    singleItem: item,
+    moreItem: item,
+    radiusItem: item,
+    scenesItem: item,
+    singleTag: tag,
+    moreTag: tag,
+    radiusTag: tag,
+    goodTag: tag,
+    actTag: tag,
+    vipTag: tag
+  };
+  data = {
+    singles: [{
+      className: 'primary',
+      text: '标'
+    }, {
+      className: 'primary ghost',
+      text: '标'
+    }, {
+      text: '标'
+    }, {
+      className: 'ghost',
+      text: '标'
+    }],
+    mores: [{
+      className: 'primary',
+      text: '我是标签'
+    }, {
+      className: 'primary ghost',
+      text: '我是标签'
+    }, {
+      text: '我是标签'
+    }, {
+      className: 'ghost',
+      text: '我是标签'
+    }],
+    radius: [{
+      className: 'primary',
+      text: '我是标签'
+    }, {
+      className: 'primary ghost',
+      text: '我是标签'
+    }, {
+      text: '我是标签'
+    }, {
+      className: 'ghost',
+      text: '我是标签'
+    }],
+    goodTags: [{
+      className: 'primary',
+      text: '自营'
+    }, {
+      className: 'yellow',
+      text: '直供'
+    }, {
+      className: 'global',
+      text: '全球购'
+    }, {
+      text: '7天退货'
+    }, {
+      className: 'disabled',
+      text: '失效'
+    }],
+    actTags: [{
+      text: '限1件优惠',
+      className: 'primary ghost'
+    }, {
+      text: '限时购',
+      className: 'primary ghost'
+    }, {
+      text: '秒杀',
+      className: 'primary ghost'
+    }, {
+      text: '标',
+      className: 'primary ghost'
+    }],
+    vipTags: [{
+      text: 'VIP'
+    }, {
+      text: 'SVIP'
+    }, {
+      text: '过期VIP',
+      className: 'disabled'
+    }]
+  };
+}
+</script>

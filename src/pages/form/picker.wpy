@@ -1,0 +1,104 @@
+<style lang="less">
+.pickers {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.picker {
+  padding: 32rpx 0;
+  border-bottom: 1rpx solid #ebebeb;
+  width: 100%;
+}
+.label {
+  min-width: 180rpx;
+}
+</style>
+<template>
+  <view class="container">
+    <pageHeader text="Picker 选择器" />
+    <view class="body">
+        <timeItem title="时间选择器">
+          <block slot="inner">
+            <view class="pickers">
+              <timePicker label="选择时间" className="picker" labelClassName="label" mode="time" start="00:00" end="23:59" />
+              <datePicker label="选择日期" className="picker" labelClassName="label" mode="date" start="2018-09-01" end="2019-09-10" />
+            </view>
+          </block>
+        </timeItem>
+        <selectItem title="普通选择器">
+          <block slot="inner">
+            <view class="pickers">
+              <basePicker label="选择开户行" className="picker" labelClassName="label" mode="selector" :range="baseRange" :value.sync="baseValue" />
+              <baseObjPicker label="选择所属大学" className="picker" labelClassName="label" mode="selector" :range="baseObArry" :value.sync="baseObjValue" rangeKey="name" />
+            </view>
+          </block>
+        </selectItem>
+        <mulItem title="多列选择器">
+          <block slot="inner">
+            <view class="pickers">
+              <mulPicker label="家族关系" mode="multiSelector" className="picker" labelClassName="label" :range="fams" :value.sync="famsValue">
+                <block slot="value">{{fams[0][famsValue[0]] ? fams[0][famsValue[0]] : '请选择'}} {{fams[1][famsValue[1]]}} {{fams[2][famsValue[2]]}}</block>
+              </mulPicker>
+              <mulObjPicker label="家族关系" mode="multiSelector" className="picker" labelClassName="label" :range="famsObj" rangeKey="value" :value.sync="famsObjValue">
+                <block slot="value">{{famsObj[0][famsObjValue[0]]['value'] ? famsObj[0][famsObjValue[0]]['value'] : '请选择'}} {{famsObj[1][famsObjValue[1]]['value']}} {{famsObj[2][famsObjValue[2]]['value']}}</block>
+              </mulObjPicker>
+            </view>
+          </block>
+        </mulItem>
+        <addressItem title="地址选择器">
+          <block slot="inner">
+            <view class="pickers">
+              <addressPicker label="所在地区" mode="region" customItem="全部" className="picker" labelClassName="label" :value.sync="region" />
+            </view>
+          </block>
+        </addressItem>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import pageHeader from 'components/PageHeader';
+import item from 'components/PageItem';
+import picker from 'components/Form/Picker';
+export default class PickerPage extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Huiguo UI'
+  };
+  components = {
+    pageHeader,
+    timeItem: item,
+    selectItem: item,
+    mulItem: item,
+    addressItem: item,
+    timePicker: picker,
+    datePicker: picker,
+    basePicker: picker,
+    baseObjPicker: picker,
+    mulPicker: picker,
+    mulObjPicker: picker,
+    addressPicker: picker
+  };
+  data = {
+    baseRange: ['招商银行', '平安银行', '中国银行'],
+    baseValue: 0,
+    baseObArry: [{ name: '深圳大学' }, { name: '暨南大学' }],
+    baseObjValue: 0,
+    fams: [
+      ['爷爷', '奶奶'],
+      ['大伯', '父亲', '姑姑'],
+      ['堂兄', '表姐妹', '亲弟弟']
+    ],
+    famsValue: 0,
+    famsObj: [
+      [{ value: '爷爷' }, { value: '奶奶' }],
+      [{ value: '大伯' }, { value: '父亲' }, { value: '姑姑' }],
+      [{ value: '堂兄' }, { value: '表姐妹' }, { value: '亲弟弟' }]
+    ],
+    famsObjValue: 0
+  };
+}
+</script>
