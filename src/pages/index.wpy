@@ -134,5 +134,12 @@ export default class Index extends wepy.page {
   events = {};
 
   onLoad() {}
+  // set share
+  onShareAppMessage() {
+    return {
+      title: 'Huiguo UI',
+      path: '/pages/index'
+    };
+  }
 }
 </script>

@@ -18,7 +18,6 @@ button::after {
   width: 100%;
   box-sizing: border-box;
   &.column {
-    height: 116rpx;
     flex-direction: column;
   }
   &.button-hover {
@@ -42,9 +41,6 @@ button::after {
     .hg__btn__text {
       font-size: 36rpx;
     }
-  }
-  &.big.column {
-    height: 116rpx;
   }
   &.small {
     padding: 0 24rpx;
