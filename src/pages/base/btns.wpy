@@ -1,8 +1,11 @@
 <style lang="less">
 .item__desc {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
+  -webkit-flex-direction: column;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   font-size: 24rpx;
   color: #666;
   text + text {
@@ -13,9 +16,13 @@
 }
 .big__btns {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
+  -webkit-flex-direction: column;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: center;
+  -webkit-align-items: center;
   font-size: 0;
   width: 100%;
   .hg__btn {
@@ -29,9 +36,13 @@
 }
 .small__btns {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
+  -webkit-flex-direction: column;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: flex-start;
+  -webkit-align-items: flex-start;
   font-size: 0;
   .hg__btn {
     margin-top: 34rpx;

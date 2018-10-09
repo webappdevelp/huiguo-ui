@@ -1,9 +1,13 @@
 <style lang="less">
 .hg__coupon {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
+  -webkit-flex-direction: column;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: flex-start;
+  -webkit-align-items: flex-start;
   font-size: 0;
   width: 100%;
   overflow: hidden;
@@ -12,9 +16,12 @@
   }
   &__box {
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
     justify-content: flex-start;
+    -webkit-justify-content: flex-start;
     align-items: center;
+    -webkit-align-items: center;
     font-size: 0;
     height: 196rpx;
     width: 100%;
@@ -24,9 +31,13 @@
   &__left {
     position: relative;
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
+    -webkit-flex-direction: column;
     justify-content: center;
+    -webkit-justify-content: center;
     align-items: center;
+    -webkit-align-items: center;
     width: 180rpx;
     height: 196rpx;
     background: #E0BE75;
@@ -34,10 +45,15 @@
   }
   &__right {
     flex: 1;
+    -webkit-flex: 1;
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
+    -webkit-flex-direction: column;
     justify-content: center;
+    -webkit-justify-content: center;
     align-items: flex-start;
+    -webkit-align-items: flex-start;
     position: relative;
     font-size: 0;
     padding: 0 24rpx;
@@ -97,9 +113,13 @@
   }
   &__desc {
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
+    -webkit-flex-direction: column;
     justify-content: flex-start;
+    -webkit-justify-content: flex-start;
     align-items: flex-start;
+    -webkit-align-items: flex-start;
     font-size: 0;
     width: 100%;
     padding: 16rpx 12rpx;
@@ -115,11 +135,14 @@
     flex: 1;
     width: 100%;
     display: flex;
+    display: -webkit-flex;
   }
   &__desc__header {
     flex-direction: row;
     justify-content: space-between;
+    -webkit-justify-content: space-between;
     align-items: center;
+    -webkit-align-items: center;
     text {
       font-size: 24rpx;
       color: #999;
@@ -130,14 +153,18 @@
     &.active {
       .hg__icon {
         transform: rotate(-180deg);
+        -webkit-transform: rotate(-180deg);
       }
     }
   }
   &__desc__body {
     margin-top: 8rpx;
     flex-direction: column;
+    -webkit-flex-direction: column;
     justify-content: flex-start;
+    -webkit-justify-content: flex-start;
     align-items: flex-start;
+    -webkit-align-items: flex-start;
     font-size: 0;
   }
   &__desc__item {

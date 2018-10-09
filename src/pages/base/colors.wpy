@@ -15,10 +15,15 @@
   &__box {
     margin-bottom: 40rpx;
     flex: 1;
+    -webkit-flex: 1;
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
+    -webkit-flex-direction: column;
     justify-content: flex-end;
+    -webkit-justify-content: flex-end;
     align-items: center;
+    -webkit-align-items: center;
     padding: 12rpx 0;
     width: 150rpx;
     height: 150rpx;
@@ -31,6 +36,7 @@
     &.cF5E0B0,
     &.c666461 {
       justify-content: space-between;
+      -webkit-justify-content: space-between;
     }
     &.cEBCD8D {
       background-image: linear-gradient(-180deg, #EBCD8D 0%, #CCA44E 100%);
@@ -78,26 +84,6 @@
             </block>
           </block>
         </item>
-        <!-- <view class="item">
-          <itemTitle :text="item['name']" />
-          <view class="item__title">{{item['name']}}</view>
-          <view class="item__inner">
-            <block wx:for="{{item['colors']}}" wx:for-index="idx" wx:for-item="color" wx:key="{{idx}}">
-              <view class="color">
-                <view class="color__box c{{color['color']}}" style="background-color: #{{color['color']}}; box-shadow: {{color['boxShadow']}}; color: {{color['textColor']}}">
-                  <text>#{{color['color']}}</text>
-                  <block wx:if="{{color['type']}}">
-                    <text>#{{color['rgba']}}</text>
-                  </block>
-                  <block wx:else>
-                    <text>{{color['rgba']}}</text>
-                  </block>
-                </view>
-                <text class="color__text">{{color['text']}}</text>
-              </view>
-            </block>
-          </view>
-        </view> -->
       </repeat>
     </view>
   </view>

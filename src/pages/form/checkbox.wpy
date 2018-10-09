@@ -1,15 +1,19 @@
 <style lang="less">
 .checkbox {
   flex: 1;
+  -webkit-flex: 1;
   padding-top: 32rpx;
   padding-bottom: 32rpx;
   border-bottom: 1rpx solid #ebebeb;
 }
 .checkbox__row {
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: center;
+  -webkit-align-items: center;
   font-size: 0;
   .hg__checkbox {
     margin-right: 20rpx;

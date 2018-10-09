@@ -1,9 +1,13 @@
 <style lang="less">
 .hg__bigspans {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
+  -webkit-flex-direction: column;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: flex-start;
+  -webkit-align-items: flex-start;
   font-size: 0;
   width: 100%;
   box-sizing: border-box;
@@ -15,6 +19,7 @@
 }
 .hg__bigspan {
   flex: 1;
+  -webkit-flex: 1;
   position: relative;
   padding: 28rpx;
   width: 100%;
@@ -27,9 +32,13 @@
   }
   &__inner {
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
+    -webkit-flex-direction: column;
     justify-content: flex-start;
+    -webkit-justify-content: flex-start;
     align-items: flex-start;
+    -webkit-align-items: flex-start;
     font-size: 0;
     width: 100%;
     overflow: hidden;
@@ -37,19 +46,27 @@
   &__info {
     margin-top: 20rpx;
     flex: 1;
+    -webkit-flex: 1;
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
+    -webkit-flex-direction: column;
     justify-content: space-between;
+    -webkit-justify-content: space-between;
     align-items: flex-start;
+    -webkit-align-items: flex-start;
     font-size: 0;
     max-width: 100%;
     overflow: hidden;
   }
   &__footer {
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
     justify-content: space-between;
+    -webkit-justify-content: space-between;
     align-items: center;
+    -webkit-align-items: center;
     font-size: 0;
     width: 100%;
   }

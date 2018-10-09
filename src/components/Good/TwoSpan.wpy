@@ -1,9 +1,14 @@
 <style lang="less">
 .hg__twospans {
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
   justify-content: space-between;
+  -webkit-justify-content: space-between;
   align-items: flex-start;
+  -webkit-align-items: flex-start;
   font-size: 0;
   flex-wrap: wrap;
   width: 100%;
@@ -24,9 +29,13 @@
   }
   &__inner {
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
+    -webkit-flex-direction: column;
     justify-content: center;
+    -webkit-justify-content: center;
     align-items: flex-start;
+    -webkit-align-items: flex-start;
     font-size: 0;
   }
   &__info {
@@ -35,9 +44,12 @@
   }
   &__footer {
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
     justify-content: space-between;
+    -webkit-justify-content: space-between;
     align-items: center;
+    -webkit-align-items: center;
     font-size: 0;
     width: 100%;
   }

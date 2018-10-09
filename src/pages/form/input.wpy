@@ -7,9 +7,12 @@
 }
 .err__tips {
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: center;
+  -webkit-align-items: center;
   margin-top: 12rpx;
   font-size: 24rpx;
   color: #c43636;
@@ -23,13 +26,17 @@
 }
 .get__code {
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: center;
+  -webkit-align-items: center;
   font-size: 0;
   border-bottom: 1rpx solid #ebebeb;
   .hg__input {
     flex: 1;
+    -webkit-flex: 1;
     border-bottom: 0 none;
   }
 }

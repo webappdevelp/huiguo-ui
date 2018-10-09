@@ -1,15 +1,18 @@
 <style lang="less">
 .hg__col {
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: flex-start;
+  -webkit-align-items: flex-start;
   font-size: 0;
   box-sizing: border-box;
 }
 </style>
 <template>
-  <view class="hg__col {{className}}" style="flex: {{span}}; flex-direction: {{direction}}; ">
+  <view class="hg__col {{className}}" style="flex: {{span}}; -webkit-flex: {{span}}; flex-direction: {{direction}}; -webkit-flex-direction: {{direction}}">
     <slot name="col" />
   </view>
 </template>

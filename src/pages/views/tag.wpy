@@ -7,9 +7,12 @@
 .tags {
   padding-top: 30rpx;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: center;
+  -webkit-align-items: center;
   font-size: 0;
   width: 100%;
 }
@@ -20,12 +23,12 @@
   margin-left: 24rpx;
 }
 .yellow {
-  background: #F08335;
-  border-color: #F08335;
+  background: #f08335;
+  border-color: #f08335;
 }
 .global {
-  background: #6600EE;
-  border-color: #6600EE;
+  background: #6600ee;
+  border-color: #6600ee;
 }
 </style>
 <template>
@@ -110,78 +113,108 @@ export default class Tags extends wepy.page {
     vipTag: tag
   };
   data = {
-    singles: [{
-      className: 'primary',
-      text: '标'
-    }, {
-      className: 'primary ghost',
-      text: '标'
-    }, {
-      text: '标'
-    }, {
-      className: 'ghost',
-      text: '标'
-    }],
-    mores: [{
-      className: 'primary',
-      text: '我是标签'
-    }, {
-      className: 'primary ghost',
-      text: '我是标签'
-    }, {
-      text: '我是标签'
-    }, {
-      className: 'ghost',
-      text: '我是标签'
-    }],
-    radius: [{
-      className: 'primary',
-      text: '我是标签'
-    }, {
-      className: 'primary ghost',
-      text: '我是标签'
-    }, {
-      text: '我是标签'
-    }, {
-      className: 'ghost',
-      text: '我是标签'
-    }],
-    goodTags: [{
-      className: 'primary',
-      text: '自营'
-    }, {
-      className: 'yellow',
-      text: '直供'
-    }, {
-      className: 'global',
-      text: '全球购'
-    }, {
-      text: '7天退货'
-    }, {
-      className: 'disabled',
-      text: '失效'
-    }],
-    actTags: [{
-      text: '限1件优惠',
-      className: 'primary ghost'
-    }, {
-      text: '限时购',
-      className: 'primary ghost'
-    }, {
-      text: '秒杀',
-      className: 'primary ghost'
-    }, {
-      text: '标',
-      className: 'primary ghost'
-    }],
-    vipTags: [{
-      text: 'VIP'
-    }, {
-      text: 'SVIP'
-    }, {
-      text: '过期VIP',
-      className: 'disabled'
-    }]
+    singles: [
+      {
+        className: 'primary',
+        text: '标'
+      },
+      {
+        className: 'primary ghost',
+        text: '标'
+      },
+      {
+        text: '标'
+      },
+      {
+        className: 'ghost',
+        text: '标'
+      }
+    ],
+    mores: [
+      {
+        className: 'primary',
+        text: '我是标签'
+      },
+      {
+        className: 'primary ghost',
+        text: '我是标签'
+      },
+      {
+        text: '我是标签'
+      },
+      {
+        className: 'ghost',
+        text: '我是标签'
+      }
+    ],
+    radius: [
+      {
+        className: 'primary',
+        text: '我是标签'
+      },
+      {
+        className: 'primary ghost',
+        text: '我是标签'
+      },
+      {
+        text: '我是标签'
+      },
+      {
+        className: 'ghost',
+        text: '我是标签'
+      }
+    ],
+    goodTags: [
+      {
+        className: 'primary',
+        text: '自营'
+      },
+      {
+        className: 'yellow',
+        text: '直供'
+      },
+      {
+        className: 'global',
+        text: '全球购'
+      },
+      {
+        text: '7天退货'
+      },
+      {
+        className: 'disabled',
+        text: '失效'
+      }
+    ],
+    actTags: [
+      {
+        text: '限1件优惠',
+        className: 'primary ghost'
+      },
+      {
+        text: '限时购',
+        className: 'primary ghost'
+      },
+      {
+        text: '秒杀',
+        className: 'primary ghost'
+      },
+      {
+        text: '标',
+        className: 'primary ghost'
+      }
+    ],
+    vipTags: [
+      {
+        text: 'VIP'
+      },
+      {
+        text: 'SVIP'
+      },
+      {
+        text: '过期VIP',
+        className: 'disabled'
+      }
+    ]
   };
 }
 </script>

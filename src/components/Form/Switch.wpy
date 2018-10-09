@@ -1,10 +1,14 @@
 <style lang="less">
 .hg__switch {
   flex: 1;
+  -webkit-flex: 1;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: space-between;
+  -webkit-justify-content: space-between;
   align-items: center;
+  -webkit-align-items: center;
   font-size: 0;
   padding: 32rpx 0;
   box-sizing: border-box;

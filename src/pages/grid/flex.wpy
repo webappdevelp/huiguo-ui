@@ -7,10 +7,10 @@
 }
 .col__a {
   justify-content: center;
+  -webkit-justify-content: center;
   align-items: center;
+  -webkit-align-items: center;
   background: #e0be75;
-  justify-content: center;
-  align-items: center;
   color: #fff;
   height: 38rpx;
   font-size: 24rpx;
@@ -21,10 +21,10 @@
 .wrap__col {
   width: 25%;
   justify-content: center;
+  -webkit-justify-content: center;
   align-items: center;
+  -webkit-align-items: center;
   background: #e0be75;
-  justify-content: center;
-  align-items: center;
   color: #fff;
   height: 38rpx;
   font-size: 24rpx;

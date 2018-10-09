@@ -1,29 +1,40 @@
 <style lang="less">
 .hg__goodprices {
   flex: 1;
+  -webkit-flex: 1;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   flex-flow: row;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: center;
+  -webkit-align-items: center;
   height: 44rpx;
   white-space: nowrap;
   overflow: hidden;
 }
 .hg__goodprices__sale {
   display: flex;
+  display: -webkit-flex;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: center;
+  -webkit-align-items: center;
   font-size: 32rpx;
   color: #333;
 }
 .hg__goodprices__profit {
   position: relative;
   display: flex;
+  display: -webkit-flex;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: center;
+  -webkit-align-items: center;
   padding-left: 28rpx;
   font-size: 32rpx;
+  line-height: 44rpx;
   font-weight: bold;
   color: #d64040;
   &::before {
@@ -34,6 +45,7 @@
     color: #d8d8d8;
     font-size: 20rpx;
     transform: translate3d(10rpx, -50%, 0);
+    -webkit-transform: translate3d(10rpx, -50%, 0);
   }
 }
 .hg__goodprices__profitprev {

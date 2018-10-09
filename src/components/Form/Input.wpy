@@ -1,9 +1,12 @@
 <style lang="less">
 .hg__input {
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: center;
+  -webkit-align-items: center;
   padding: 28rpx 0;
   font-size: 0;
   box-sizing: border-box;
@@ -23,14 +26,19 @@
   }
   &__inner {
     flex: 1;
+    -webkit-flex: 1;
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
     justify-content: flex-start;
+    -webkit-justify-content: flex-start;
     align-items: center;
+    -webkit-align-items: center;
     font-size: 0;
   }
   &__input {
     flex: 1;
+    -webkit-flex: 1;
     height: 60rpx;
     line-height: 60rpx;
     font-size: 30rpx;

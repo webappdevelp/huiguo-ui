@@ -23,7 +23,9 @@
   display: flex;
   display: -webkit-flex;
   justify-content: center;
+  -webkit-justify-content: center;
   align-items: center;
+  -webkit-align-items: center;
   height: 156rpx;
   width: 156rpx;
   font-size: 32rpx;
@@ -33,6 +35,7 @@
   border-radius: 50%;
   color: #fff;
   transform: translate3d(-50%, -50%, 0);
+  -webkit-transform: translate3d(-50%, -50%, 0);
   overflow: hidden;
   &.big {
     width: 196rpx;

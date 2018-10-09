@@ -1,19 +1,27 @@
 <style lang="less">
 .hg__rich__lists {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
+  -webkit-flex-direction: column;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: flex-start;
+  -webkit-align-items: flex-start;
   font-size: 0;
   padding: 0 28rpx;
   max-width: 100%;
 }
 .hg__rich__list__item {
   flex: 1;
+  -webkit-flex: 1;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: center;
+  -webkit-justify-content: center;
   align-items: flex-start;
+  -webkit-align-items: flex-start;
   font-size: 0;
   padding: 30rpx 0;
   width: 100%;
@@ -31,10 +39,15 @@
   }
   &__inner {
     flex: 1;
+    -webkit-flex: 1;
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
+    -webkit-flex-direction: column;
     justify-content: flex-start;
+    -webkit-justify-content: flex-start;
     align-items: flex-start;
+    -webkit-align-items: flex-start;
     font-size: 0;
     max-width: 100%;
     overflow: hidden;

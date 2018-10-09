@@ -1,14 +1,19 @@
 <style lang="less">
 .hg__radios {
   flex: 1;
+  -webkit-flex: 1;
   max-width: 100%;
   overflow: hidden;
 }
 .hg__radio {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
+  -webkit-flex-direction: column;
   justify-content: center;
+  -webkit-justify-content: center;
   align-items: flex-start;
+  -webkit-align-items: flex-start;
   position: relative;
   padding-right: 60rpx;
   font-size: 0;
@@ -26,6 +31,7 @@
     top: 50%;
     right: 0;
     transform: translate3d(0, -50%, 0);
+    -webkit-transform: translate3d(0, -50%, 0);
   }
   &__hiden {
     display: none;

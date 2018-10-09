@@ -1,17 +1,24 @@
 <style lang="less">
 .hg__lists {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
+  -webkit-flex-direction: column;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: flex-start;
+  -webkit-align-items: flex-start;
   font-size: 0;
   padding: 0 28rpx;
 }
 .hg__list__item {
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: space-between;
+  -webkit-justify-content: space-between;
   align-items: center;
+  -webkit-align-items: center;
   font-size: 0;
   height: 108rpx;
   width: 100%;
@@ -21,10 +28,15 @@
   }
   &__inner {
     flex: 1;
+    -webkit-flex: 1;
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
+    -webkit-flex-direction: column;
     justify-content: center;
+    -webkit-justify-content: center;
     align-items: flex-start;
+    -webkit-align-items: flex-start;
     font-size: 0;
   }
   &__title {

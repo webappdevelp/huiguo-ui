@@ -1,9 +1,12 @@
 <style lang="less">
 .hg__row {
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: flex-start;
+  -webkit-align-items: flex-start;
   font-size: 0;
   padding: 0 28rpx;
   box-sizing: border-box;
@@ -14,7 +17,7 @@
 }
 </style>
 <template>
-  <view class="hg__row {{noGutters ? 'hg__row__no-gutters' : ''}} {{className}}" style="flex-direction: {{direction}}; justify-content: {{justifyContent}}; align-items: {{alignItems}}; flex-wrap: {{wrap}}">
+  <view class="hg__row {{noGutters ? 'hg__row__no-gutters' : ''}} {{className}}" style="flex-direction: {{direction}}; -webkit-flex-direction: {{direction}}; justify-content: {{justifyContent}}; -webkit-justify-content: {{justifyContent}}; align-items: {{alignItems}}; -webkit-align-items: {{alignItems}}; flex-wrap: {{wrap}}; -webkit-flex-wrap: {{wrap}};">
     <slot name="row" />
   </view>
 </template>

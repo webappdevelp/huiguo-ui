@@ -2,9 +2,12 @@
 .list__header {
   padding: 58rpx 0 58rpx 58rpx;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: center;
+  -webkit-align-items: center;
   font-size: 0;
   background: #f8f8f8;
   image {

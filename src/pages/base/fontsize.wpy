@@ -3,13 +3,18 @@
   padding: 24rpx 28rpx 100rpx;
 }
 .page__item__inner {
+  flex-direction: column;
+  -webkit-flex-direction: column;
   width: 100%;
   box-sizing: border-box;
 }
 .demo {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
+  -webkit-flex-direction: column;
   justify-content: flex-start;
+  -webkit-jusitfy-content: flex-start;
   width: 100%;
   margin-bottom: 20rpx;
   &__title {
@@ -24,10 +29,14 @@
   &__li {
     margin-top: 26rpx;
     flex: 1;
+    -webkit-flex: 1;
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
     justify-content: flex-start;
+    -webkit-justify-content: flex-start;
     align-items: center;
+    -webkit-align-items: center;
     height: 76rpx;
     padding: 0 24rpx;
     background: #FFF9F0;
@@ -41,6 +50,7 @@
     }
     .desc {
       flex: 1;
+      -webkit-flex: 1;
     }
     .lh {
       width: 86rpx;
@@ -50,15 +60,21 @@
 }
 .li {
   flex: 1;
+  -webkit-flex: 1;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: center;
+  -webkit-align-items: center;
   height: 170rpx;
   padding: 0 24rpx;
+  width: 100%;
   font-size: 0;
   color: #333;
   border-radius: 4rpx;
+  box-sizing: border-box;
   &.eve {
     background: #fcfcfc;
   }
@@ -67,6 +83,7 @@
   }
   &__desc {
     flex: 1;
+    -webkit-flex: 1;
     font-size: 26rpx;
     line-height: 36rpx;
   }

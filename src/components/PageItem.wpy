@@ -7,9 +7,13 @@
 }
 .page__item {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
+  -webkit-flex-direction: column;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: flex-start;
+  -webkit-align-items: flex-start;
   padding-top: 12rpx;
   font-size: 0;
   &__title {
@@ -27,14 +31,19 @@
       height: 30rpx;
       background: #f3cc7a;
       transform: translate3d(0, -50%, 0);
+      -webkit-transform: translate3d(0, -50%, 0);
     }
   }
   &__inner {
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
     justify-content: flex-start;
+    -webkit-justify-content: flex-start;
     align-items: flex-start;
+    -webkit-align-items: flex-start;
     flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
     font-size: 0;
     padding: 52rpx 38rpx 0;
     width: 100%;

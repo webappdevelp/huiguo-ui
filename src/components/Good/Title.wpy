@@ -17,6 +17,7 @@
     width: 26rpx;
     height: 26rpx;
     transform: translate3d(0, 4rpx, 0);
+    -webkit-transform: translate3d(0, 4rpx, 0);
   }
 }
 </style>

@@ -1,9 +1,13 @@
 <style lang="less">
 .avatars {
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
+  -webkit-flex-direction: row;
   justify-content: flex-end;
+  -webkit-justify-content: flex-end;
   align-items: flex-end;
+  -webkit-align-items: flex-end;
 }
 .hg__avatar + .hg__avatar {
   margin-left: 46rpx;

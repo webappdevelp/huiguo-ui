@@ -1,10 +1,14 @@
 <style lang="less">
 .hg__picker {
   flex: 1;
+  -webkit-flex: 1;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: space-between;
+  -webkit-justify-content: space-between;
   align-items: center;
+  -webkit-align-items: center;
   box-sizing: border-box;
   font-size: 0;
   &__label {
@@ -16,17 +20,22 @@
   }
   picker {
     flex: 1;
+    -webkit-flex: 1;
     font-size: 0;
   }
   &__inner {
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
     justify-content: space-between;
+    -webkit-justify-content: space-between;
     align-items: center;
+    -webkit-align-items: center;
     font-size: 0;
   }
   &__value {
     flex: 1;
+    -webkit-flex: 1;
     font-size: 30rpx;
     color: #333;
     &.empty {

@@ -16,9 +16,12 @@
   padding: 0 32rpx 0 36rpx;
   height: 144rpx;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: center;
+  -webkit-align-items: center;
   background: #fff;
   box-shadow: 0 4rpx 20rpx 0 rgba(153, 153, 153, 0.08);
   &__head {
@@ -28,9 +31,13 @@
   &__inner {
     margin-left: 28rpx;
     flex: 1;
+    -webkit-flex: 1;
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
+    -webkit-flex-direction: column;
     justify-content: center;
+    -webkit-justify-content: center;
     align-items: flex-start;
     font-size: 0;
   }
